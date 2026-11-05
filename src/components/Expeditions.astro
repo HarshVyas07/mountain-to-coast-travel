@@ -1,0 +1,213 @@
+---
+// Signature Expeditions / Featured Destinations section on Home Page
+// Showing exactly 3 featured locations in a single row with an Explore All Destinations button
+import { destinations } from '../data/destinations';
+
+// Featured 3 destinations for the home page single row
+const featuredDestinations = destinations.slice(0, 3);
+---
+
+<section id="signature-expeditions" class="w-full py-space-2xl bg-surface-container-low scroll-mt-20">
+  <div id="upcoming-tours" class="scroll-mt-24"></div>
+  <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-2xl scroll-reveal">
+      <div class="flex flex-col gap-space-xs max-w-2xl">
+        <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+          USA Guided Tours &bull; Latin America Group Trips
+        </span>
+        <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight">
+          Latin America Guided Tours: Handcrafted Small-Group Expeditions
+        </h2>
+        <p class="font-subhead text-subhead text-on-surface-variant">
+          Carefully planned guided tours of Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador, and Peru balancing adventure and relaxation. Established calendar dates, 100% departure guarantees, and direct leadership by veteran US travel guides Michael and Maria.
+        </p>
+      </div>
+      <div class="flex items-center gap-space-xs shrink-0">
+        <a href="/tours" class="inline-flex items-center gap-space-xs text-primary font-label-lg text-label-lg uppercase tracking-wider hover:text-secondary transition-colors font-bold">
+          <span>All 6 Latin America Guided Tours</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Locations in a Single Row (Grid: 1 col on mobile, 3 cols on large screens) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg perspective-[1200px] stagger-children">
+      {featuredDestinations.map((exp) => (
+        <article class="expedition-3d-card bg-surface-container-lowest rounded-2xl overflow-hidden flex flex-col shadow-md hover:shadow-2xl transition-all duration-300 group border border-outline-variant/30">
+
+          <!-- Image -->
+          <div class="relative w-full h-72 overflow-hidden bg-surface-container">
+            <a href={`/${exp.slug}`} class="block w-full h-full">
+              <img
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                src={exp.heroImage}
+                alt={`Guided tours of ${exp.country} - ${exp.title}`}
+                loading="lazy"
+              />
+            </a>
+            <div class="absolute top-space-md left-space-md flex flex-wrap gap-2 pointer-events-none">
+              <span class="bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider px-space-sm py-1 rounded shadow-sm">
+                {exp.country}
+              </span>
+              <span class={`backdrop-blur-md font-label-md text-label-md tracking-wider uppercase px-space-sm py-1 rounded shadow-sm ${
+                exp.departures[0] === 'Date Not Planned'
+                  ? 'bg-surface-container-high/95 text-on-surface-variant'
+                  : 'bg-primary text-on-primary font-bold'
+              }`}>
+                {exp.badge}
+              </span>
+            </div>
+            <div class="absolute bottom-space-md left-space-md right-space-md pointer-events-none">
+              <div class="bg-primary/90 backdrop-blur-md text-surface font-label-md text-[11px] tracking-wider uppercase px-3 py-1.5 rounded flex items-center justify-between">
+                <span class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[15px] text-tertiary-fixed">
+                    {exp.departures[0] === 'Date Not Planned' ? 'event_busy' : 'event_available'}
+                  </span>
+                  <span>{exp.departures[0]}</span>
+                </span>
+                <span class="text-secondary-fixed hidden sm:inline font-semibold">
+                  {exp.departures[0] === 'Date Not Planned' ? 'Private Groups 5+' : 'Guaranteed Departure'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-space-lg flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center gap-space-sm text-secondary font-label-md text-label-md tracking-wider uppercase mb-space-xs">
+                <span>{exp.duration}</span>
+                <span>•</span>
+                <span>{exp.price}</span>
+              </div>
+              
+              <a href={`/${exp.slug}`} class="block group-hover:text-secondary transition-colors">
+                <h3 class="font-headline-sm text-headline-sm text-primary mb-space-sm">
+                  {exp.title}
+                </h3>
+              </a>
+              
+              <p class="font-body-md text-body-md text-on-surface-variant mb-space-md line-clamp-3 leading-relaxed">
+                {exp.overview[0]}
+              </p>
+
+              <!-- Highlights -->
+              <ul class="space-y-space-xs mb-space-lg">
+                {exp.highlights.slice(0, 3).map((h) => (
+                  <li class="flex items-center gap-space-xs font-body-md text-body-md text-on-surface text-[13px]">
+                    <span class="material-symbols-outlined text-[16px] text-on-tertiary-container shrink-0">check_circle</span>
+                    <span class="line-clamp-1">{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Card Footer -->
+            <div class="pt-space-md flex items-center justify-between border-t border-surface-container-highest">
+              <a
+                href={`/${exp.slug}`}
+                class="font-label-md text-label-md uppercase tracking-wider text-primary hover:text-secondary font-bold inline-flex items-center gap-1"
+              >
+                <span>Full Itinerary</span>
+                <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+              </a>
+
+              <a
+                href={`/contact?destination=${exp.slug}`}
+                class={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg font-label-md text-label-md uppercase tracking-wider transition-colors shadow-sm font-bold text-xs ${
+                  exp.departures[0] === 'Date Not Planned'
+                    ? 'bg-surface-container text-primary border border-outline-variant/60 hover:bg-surface-container-high'
+                    : 'bg-primary text-on-primary hover:bg-primary-container'
+                }`}
+              >
+                <span>{exp.departures[0] === 'Date Not Planned' ? 'Inquire (5+)' : 'Reserve Now'}</span>
+              </a>
+            </div>
+          </div>
+
+        </article>
+      ))}
+    </div>
+
+    <!-- Explore All Destinations Button Bar -->
+    <div class="mt-space-xl flex flex-col items-center justify-center text-center scroll-reveal">
+      <div class="bg-surface-container-lowest p-space-md sm:p-space-lg rounded-2xl border border-outline-variant/40 shadow-sm max-w-2xl w-full flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-left">
+          <span class="font-label-md text-[11px] uppercase tracking-widest text-secondary font-bold block">
+            6 Distinct Expeditions Across Latin America
+          </span>
+          <h4 class="font-headline-sm text-headline-sm text-primary">
+            Looking for Honduras, El Salvador, or Peru?
+          </h4>
+          <p class="font-caption text-caption text-on-surface-variant mt-0.5">
+            View full schedules, dates, and itineraries for all 6 destination countries.
+          </p>
+        </div>
+        
+        <a
+          href="/tours"
+          class="shrink-0 inline-flex items-center gap-2 bg-primary-container text-on-primary px-space-lg py-3 rounded-xl font-label-lg text-label-lg uppercase tracking-widest hover:bg-primary shadow-md hover:shadow-lg transition-all font-bold"
+        >
+          <span>Explore All Destinations</span>
+          <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- PDF Slide 7 Feature: Group Travel Guarantee Banner -->
+    <div class="mt-space-2xl bg-surface-container-lowest p-space-lg md:p-space-xl rounded-2xl border border-outline-variant/40 shadow-sm scroll-reveal">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+        <div class="lg:col-span-4 flex flex-col gap-2">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">Peace of Mind</span>
+          <h3 class="font-headline-sm text-headline-sm text-primary">How Group Travel Works With Us</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">
+            From fixed calendar dates to our 100% deposit refund guarantee, your adventure is organized for effortless joy and security.
+          </p>
+        </div>
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-space-md">
+          <div class="p-space-md bg-surface-container-low rounded-xl">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-2">currency_exchange</span>
+            <h4 class="font-label-lg text-primary font-bold">100% Refund Guarantee</h4>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              If the minimum participant number is not reached, travel will be canceled and your deposit fully refunded.
+            </p>
+          </div>
+          <div class="p-space-md bg-surface-container-low rounded-xl">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-2">event_repeat</span>
+            <h4 class="font-label-lg text-primary font-bold">Fixed Yet Flexible</h4>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Thoughtfully structured itineraries with dedicated free time built in to explore at your personal pace.
+            </p>
+          </div>
+          <div class="p-space-md bg-surface-container-low rounded-xl">
+            <span class="material-symbols-outlined text-primary text-[24px] mb-2">receipt_long</span>
+            <h4 class="font-label-lg text-primary font-bold">Clearly Spelled Out</h4>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Zero surprises. All inclusions, boutique lodging, and guide services are clearly detailed prior to booking.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // 3D Card Hover Depth on Expedition Cards
+  const cards = document.querySelectorAll('.expedition-3d-card');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const event = e as MouseEvent;
+      const rect = (card as HTMLElement).getBoundingClientRect();
+      const x = event.clientX - rect.left - rect.width / 2;
+      const y = event.clientY - rect.top - rect.height / 2;
+      (card as HTMLElement).style.transform = `perspective(1000px) rotateX(${-y / 35}deg) rotateY(${x / 35}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      (card as HTMLElement).style.transform = '';
+    });
+  });
+</script>

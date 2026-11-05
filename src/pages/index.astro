@@ -1,11 +1,99 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import PhilosophyStats from "../components/PhilosophyStats.astro";
+import Expeditions from "../components/Expeditions.astro";
+import Ethos from "../components/Ethos.astro";
+import BespokeCta from "../components/BespokeCta.astro";
+import Gallery from "../components/Gallery.astro";
+import Footer from "../components/Footer.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = "Latin America Guided Tours | USA Guided Tours | Mountains to Coast Travel";
+const pageDescription = "Experience premier guided tours and Latin America group trips with Mountains to Coast Travel. Led by expert US travel guides across Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador, and Peru.";
+const pageKeywords = "guided tours, usa guided tours, Latin America guided tours, Latin America group trips, us travel guides, best travel guides, usa travel guides, Mountains to travel coast, guided tours of Nicaragua, guided tours of Costa Rica, guided tours of Guatemala, guided tours of Honduras, guided tours of El Salvador, guided tours of Peru, usa guided tours Nicaragua, usa guided tours Costa Rica, usa guided tours Guatemala, usa guided tours Honduras, usa guided tours El Salvador, usa guided tours Peru";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  image="/assets/images/IMG_5223.jpg"
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface">
+    <div class="flex flex-col w-full">
+      <Hero />
+      <PhilosophyStats />
+
+      <!-- Upcoming Tours / Signature Expeditions -->
+      <Expeditions />
+
+      <!-- The Mountains to Coast Ethos -->
+      <Ethos />
+
+      <!-- Bespoke Travel CTA -->
+      <BespokeCta />
+
+      <!-- Moments Captured / Gallery -->
+      <Gallery />
+
+      <!-- Accreditation Strip -->
+      <section
+        class="w-full py-space-xl bg-surface-container-low border-t border-outline-variant/30"
+      >
+        <div
+          class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg"
+        >
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-space-lg text-center md:text-left"
+          >
+            <div>
+              <span
+                class="font-label-md text-label-md uppercase tracking-widest text-secondary font-semibold"
+                >Conservation &amp; Stewardship</span
+              >
+              <h4 class="font-headline-sm text-headline-sm text-primary mt-0.5">
+                Audited Community &amp; Ecological Stewardship
+              </h4>
+            </div>
+            <div
+              class="flex flex-wrap items-center justify-center gap-space-lg opacity-80"
+            >
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px] text-primary"
+                  >verified</span
+                >
+                <span
+                  class="font-label-lg text-label-lg uppercase tracking-wider text-primary"
+                  >Rainforest Alliance Certified</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px] text-primary"
+                  >public</span
+                >
+                <span
+                  class="font-label-lg text-label-lg uppercase tracking-wider text-primary"
+                  >GSTC Sustainable Standard</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[24px] text-primary"
+                  >nature_people</span
+                >
+                <span
+                  class="font-label-lg text-label-lg uppercase tracking-wider text-primary"
+                  >Indigenous Lands Trust</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
 </Layout>

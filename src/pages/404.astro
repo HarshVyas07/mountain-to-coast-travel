@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "404 — Page Not Found | Mountains to Coast Travel | Guided Tours";
+const pageDescription = "The page you are looking for does not exist. Explore our Latin America guided tours and upcoming group trips across Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador & Peru.";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface min-h-[85vh] flex flex-col justify-center relative overflow-hidden">
+    
+    <!-- Atmospheric Background with 3D Depth Particles -->
+    <div class="absolute inset-0 bg-gradient-to-b from-primary via-primary-container to-primary pointer-events-none opacity-95"></div>
+    
+    <!-- 3D Decorative Floating Compass Grid -->
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-15 overflow-hidden">
+      <div class="w-[700px] h-[700px] rounded-full border-2 border-dashed border-secondary-fixed animate-[spin_60s_linear_infinite]"></div>
+      <div class="absolute w-[500px] h-[500px] rounded-full border border-secondary-fixed/50 animate-[spin_40s_linear_infinite_reverse]"></div>
+      <div class="absolute w-[300px] h-[300px] rounded-full border border-secondary-fixed/30"></div>
+    </div>
+
+    <div class="relative z-10 max-w-[900px] mx-auto px-margin md:px-margin-md text-center py-space-2xl text-surface">
+      
+      <!-- 3D Compass Badge with Mouse Tilt / Floating Keyframes -->
+      <div class="perspective-1000 inline-block mb-space-md">
+        <div class="compass-3d w-24 h-24 rounded-3xl bg-surface/10 backdrop-blur-xl border border-surface/20 flex items-center justify-center text-secondary-fixed shadow-[0_20px_50px_rgba(0,0,0,0.5)] mx-auto transform-gpu hover:scale-110 transition-transform duration-500">
+          <span class="material-symbols-outlined text-[54px] text-tertiary-fixed animate-pulse">
+            explore_off
+          </span>
+        </div>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface/10 backdrop-blur-md mb-4 text-tertiary-fixed font-label-md text-label-md uppercase tracking-widest border border-surface/15">
+        <span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-ping"></span>
+        <span>Coordinates: 0.000° N • Route Undefined</span>
+      </div>
+
+      <h1 class="font-headline-lg text-[48px] md:text-[68px] leading-tight font-normal tracking-tight text-surface">
+        Lost on the Isthmus Trail?
+      </h1>
+
+      <p class="font-subhead text-subhead text-surface/85 max-w-xl mx-auto mt-4 leading-relaxed">
+        Even the most seasoned explorers occasionally wander onto an unmapped ridge. The page you are seeking does not exist or has been relocated to another sanctuary.
+      </p>
+
+      <!-- Action Buttons with 3D Hover Lift -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mt-8">
+        <a
+          href="/"
+          class="btn-3d inline-flex items-center justify-center gap-2 bg-surface text-primary px-space-lg py-space-md rounded-xl font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-low transition-all shadow-[0_10px_25px_rgba(0,0,0,0.3)] hover:-translate-y-1"
+        >
+          <span class="material-symbols-outlined text-[18px]">home</span>
+          <span>Return to Base Camp (HOME)</span>
+        </a>
+
+        <a
+          href="/tours"
+          class="btn-3d inline-flex items-center justify-center gap-2 bg-surface/10 hover:bg-surface/20 text-surface border border-surface/30 px-space-lg py-space-md rounded-xl font-label-lg text-label-lg uppercase tracking-wider transition-all backdrop-blur-md hover:-translate-y-1"
+        >
+          <span class="material-symbols-outlined text-[18px]">travel_explore</span>
+          <span>View Upcoming Tours</span>
+        </a>
+
+        <a
+          href="/contact"
+          class="btn-3d inline-flex items-center justify-center gap-2 bg-surface/10 hover:bg-surface/20 text-surface border border-surface/30 px-space-lg py-space-md rounded-xl font-label-lg text-label-lg uppercase tracking-wider transition-all backdrop-blur-md hover:-translate-y-1"
+        >
+          <span class="material-symbols-outlined text-[18px]">support_agent</span>
+          <span>Ask Our Guides</span>
+        </a>
+      </div>
+
+      <!-- Quick Nav Suggestions -->
+      <div class="mt-12 pt-8 border-t border-surface/15 max-w-md mx-auto text-surface/70 font-caption text-caption">
+        <span class="uppercase tracking-widest text-secondary-fixed block mb-2 font-semibold">Recommended Waypoints:</span>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/tours#costa-rica" class="hover:text-surface underline decoration-surface/30">Costa Rica Cloud Forests</a>
+          <span>•</span>
+          <a href="/tours#guatemala" class="hover:text-surface underline decoration-surface/30">Guatemala &amp; Lake Atitlán</a>
+          <span>•</span>
+          <a href="/tours#nicaragua" class="hover:text-surface underline decoration-surface/30">Nicaragua Emerald Coast</a>
+          <span>•</span>
+          <a href="/gallery" class="hover:text-surface underline decoration-surface/30">Field Gallery</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .compass-3d {
+    animation: floatCompass 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
+
+  @keyframes floatCompass {
+    0%, 100% {
+      transform: translateY(0px) rotateX(6deg) rotateY(-8deg);
+    }
+    50% {
+      transform: translateY(-12px) rotateX(-6deg) rotateY(8deg);
+    }
+  }
+
+  .btn-3d {
+    transform-style: preserve-3d;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  }
+</style>

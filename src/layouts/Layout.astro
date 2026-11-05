@@ -1,23 +1,443 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import '../styles/global.css';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  schema?: Record<string, any> | Record<string, any>[];
+}
+
+const {
+  title = 'Latin America Guided Tours | USA Guided Tours | Mountains to Coast Travel',
+  description = 'Experience premier guided tours and Latin America group trips with Mountains to Coast Travel. Led by expert US travel guides across Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador, and Peru.',
+  keywords = 'guided tours, usa guided tours, Latin America guided tours, Latin America group trips, us travel guides, best travel guides, usa travel guides, Mountains to Coast Travel, guided tours of Nicaragua, guided tours of Costa Rica, guided tours of Guatemala, guided tours of Honduras, guided tours of El Salvador, guided tours of Peru, usa guided tours Nicaragua, usa guided tours Costa Rica, usa guided tours Guatemala, usa guided tours Honduras, usa guided tours El Salvador, usa guided tours Peru',
+  canonical,
+  image = '/assets/images/IMG_5223.jpg',
+  type = 'website',
+  schema,
+} = Astro.props;
+
+const siteUrl = 'https://mountainstocoasttravel.com';
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonicalUrl = canonical || (currentPath === '/' ? `${siteUrl}/` : `${siteUrl}${currentPath}`);
+const resolvedImage = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+
+// Global Organization & WebSite JSON-LD Schema
+const defaultSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    '@id': `${siteUrl}/#organization`,
+    'name': 'Mountains to Coast Travel',
+    'alternateName': ['Mountains to Coast', 'Mountains to Coast Expeditions', 'Mountains to Coast Travel LLC'],
+    'url': siteUrl,
+    'logo': `${siteUrl}/assets/images/logo.png`,
+    'image': `${siteUrl}/assets/images/logo.png`,
+    'description': 'Premier small-group Latin America guided tours and bespoke expeditions across Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador, and Peru led by veteran US travel guides.',
+    'telephone': '+1-443-722-5210',
+    'email': 'mheller@mountainstocoasttravel.com',
+    'priceRange': '$$$',
+    'address': {
+      '@type': 'PostalAddress',
+      'addressCountry': 'US'
+    },
+    'areaServed': [
+      { '@type': 'Country', 'name': 'Nicaragua' },
+      { '@type': 'Country', 'name': 'Costa Rica' },
+      { '@type': 'Country', 'name': 'Guatemala' },
+      { '@type': 'Country', 'name': 'Honduras' },
+      { '@type': 'Country', 'name': 'El Salvador' },
+      { '@type': 'Country', 'name': 'Peru' },
+      { '@type': 'Country', 'name': 'United States' }
+    ],
+    'knowsAbout': [
+      'Latin America guided tours',
+      'USA guided tours',
+      'Latin America group trips',
+      'Guided tours of Nicaragua',
+      'Guided tours of Costa Rica',
+      'Guided tours of Guatemala',
+      'Guided tours of Honduras',
+      'Guided tours of El Salvador',
+      'Guided tours of Peru'
+    ]
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${siteUrl}/#website`,
+    'url': siteUrl,
+    'name': 'Mountains to Coast Travel',
+    'description': 'Premier USA guided tours and Latin America group trips.',
+    'publisher': {
+      '@id': `${siteUrl}/#organization`
+    }
+  }
+];
+
+const allSchemas = schema
+  ? Array.isArray(schema)
+    ? [...defaultSchema, ...schema]
+    : [...defaultSchema, schema]
+  : defaultSchema;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="author" content="Mountains to Coast Travel" />
+    <meta name="publisher" content="Mountains to Coast Travel" />
+    <meta name="format-detection" content="telephone=yes" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content="Mountains to Coast Travel" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedImage} />
+    <meta property="og:image:secure_url" content={resolvedImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedImage} />
+    <meta name="twitter:image:alt" content={title} />
+
+    <!-- Geographic & Regional Targeting Signals -->
+    <meta name="geo.region" content="US-MD" />
+    <meta name="geo.placename" content="United States" />
+    <meta name="target" content="all" />
+    <meta name="audience" content="all" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+
+    <!-- Favicon & Touch Icons Generated from Logo -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- JSON-LD Structured Data -->
+    {allSchemas.map((s) => (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Base reset -->
+    <style>
+      @layer base {
+        html, body { margin: 0; padding: 0; }
+        body { overscroll-behavior: none; }
+        main > :first-child { margin-top: 0 !important; }
+        main > :last-child  { margin-bottom: 0 !important; }
+      }
+      ::-webkit-scrollbar { display: none; }
+    </style>
+
+    <!-- Tailwind Play CDN -->
+    <script is:inline src="https://cdn.tailwindcss.com"></script>
+    <script is:inline id="tailwind-config">
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'secondary-fixed-dim':       '#b7ccbc',
+                'on-tertiary-fixed':         '#3a0a00',
+                'on-primary-fixed':          '#0b1f15',
+                'inverse-surface':           '#30312e',
+                'on-background':             '#1b1c19',
+                'surface-container-lowest':  '#ffffff',
+                'secondary-fixed':           '#d2e8d8',
+                'error-container':           '#ffdad6',
+                'on-primary':                '#ffffff',
+                'primary-fixed-dim':         '#b5ccbc',
+                'surface-container-low':     '#f5f3ee',
+                'on-tertiary':               '#ffffff',
+                'primary-container':         '#14281d',
+                'on-tertiary-fixed-variant': '#793019',
+                'tertiary-fixed':            '#ffdbd0',
+                'tertiary':                  '#240400',
+                'secondary':                 '#506356',
+                'surface-tint':              '#4e6356',
+                'error':                     '#ba1a1a',
+                'surface-container-highest': '#e4e2dd',
+                'secondary-container':       '#d2e8d8',
+                'surface-dim':               '#dbdad5',
+                'on-primary-container':      '#7a9081',
+                'primary':                   '#011209',
+                'surface-variant':           '#e4e2dd',
+                'on-secondary':              '#ffffff',
+                'primary-fixed':             '#d0e8d7',
+                'surface-bright':            '#fbf9f4',
+                'inverse-on-surface':        '#f2f1ec',
+                'on-error-container':        '#93000a',
+                'on-surface-variant':        '#424844',
+                'surface':                   '#fbf9f4',
+                'surface-container':         '#f0eee9',
+                'on-secondary-fixed-variant':'#384b3f',
+                'on-tertiary-container':     '#ce7256',
+                'outline-variant':           '#c2c8c2',
+                'tertiary-fixed-dim':        '#ffb59f',
+                'on-secondary-fixed':        '#0d1f15',
+                'surface-container-high':    '#eae8e3',
+                'on-secondary-container':    '#56695c',
+                'background':                '#fbf9f4',
+                'on-surface':                '#1b1c19',
+                'on-primary-fixed-variant':  '#374b3f',
+                'inverse-primary':           '#b5ccbc',
+                'on-error':                  '#ffffff',
+                'outline':                   '#737873',
+                'tertiary-container':        '#490f00',
+              },
+              borderRadius: {
+                DEFAULT: '0.125rem',
+                lg:      '0.25rem',
+                xl:      '0.5rem',
+                full:    '0.75rem',
+              },
+              spacing: {
+                'space-lg':  '1.75rem',
+                'space-sm':  '0.5rem',
+                'gutter-lg': '2.5rem',
+                'space-md':  '1rem',
+                'space-2xl': '5rem',
+                'gutter':    '1.5rem',
+                'space-xl':  '3rem',
+                'margin':    '1.25rem',
+                'space-xs':  '0.25rem',
+                'margin-lg': '5rem',
+                'margin-md': '3rem',
+              },
+              fontFamily: {
+                'headline-lg':        ['Playfair Display'],
+                'label-lg':           ['Plus Jakarta Sans'],
+                'subhead':            ['Plus Jakarta Sans'],
+                'label-md':           ['Plus Jakarta Sans'],
+                'headline-lg-mobile': ['Playfair Display'],
+                'body-lg':            ['Plus Jakarta Sans'],
+                'display-xl-mobile':  ['Playfair Display'],
+                'headline-md':        ['Playfair Display'],
+                'headline-sm':        ['Playfair Display'],
+                'display-xl':         ['Playfair Display'],
+                'body-md':            ['Plus Jakarta Sans'],
+                'caption':            ['Plus Jakarta Sans'],
+              },
+              fontSize: {
+                'headline-lg':        ['40px', { lineHeight: '48px', letterSpacing: '-0.015em', fontWeight: '400' }],
+                'label-lg':           ['13px', { lineHeight: '18px', letterSpacing: '0.08em',   fontWeight: '600' }],
+                'subhead':            ['18px', { lineHeight: '28px', letterSpacing: '-0.005em', fontWeight: '400' }],
+                'label-md':           ['11px', { lineHeight: '16px', letterSpacing: '0.12em',   fontWeight: '600' }],
+                'headline-lg-mobile': ['30px', { lineHeight: '38px', letterSpacing: '-0.01em',  fontWeight: '400' }],
+                'body-lg':            ['16px', { lineHeight: '26px', fontWeight: '400' }],
+                'display-xl-mobile':  ['38px', { lineHeight: '46px', letterSpacing: '-0.01em',  fontWeight: '400' }],
+                'headline-md':        ['28px', { lineHeight: '36px', fontWeight: '400' }],
+                'headline-sm':        ['22px', { lineHeight: '30px', fontWeight: '500' }],
+                'display-xl':         ['56px', { lineHeight: '64px', letterSpacing: '-0.02em',  fontWeight: '400' }],
+                'body-md':            ['14px', { lineHeight: '22px', fontWeight: '400' }],
+                'caption':            ['12px', { lineHeight: '18px', fontWeight: '400' }],
+              },
+            },
+          },
+        };
+    </script>
+  </head>
+
+  <body class="bg-surface font-body-md text-body-md text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+    <slot />
+
+    <!-- Mobile Sticky Book Now Button (Always visible on mobile) -->
+    <div
+      id="mobile-book-now"
+      class="fixed bottom-0 left-0 right-0 z-50 xl:hidden px-4 py-3 bg-surface/95 backdrop-blur-md border-t border-outline-variant/30 shadow-[0_-8px_24px_rgba(20,40,29,0.15)] pb-[calc(0.75rem+env(safe-area-inset-bottom,0px))]"
+    >
+      <a
+        href="/contact"
+        class="w-full flex items-center justify-center gap-2.5 bg-primary-container text-on-primary py-3.5 px-6 rounded-xl font-label-lg text-label-lg uppercase tracking-widest shadow-lg hover:bg-primary active:scale-[0.98] transition-all text-center font-bold"
+      >
+        <span class="material-symbols-outlined text-[20px] text-secondary-fixed">calendar_month</span>
+        <span>Book Now</span>
+      </a>
+    </div>
+
+    <!-- Scroll Animations & Page Transitions -->
+    <style is:global>
+      /* Smooth scrolling for anchor links */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Scroll-reveal animation classes */
+      .scroll-reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .scroll-reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scroll-reveal-left {
+        opacity: 0;
+        transform: translateX(-35px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .scroll-reveal-left.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-reveal-right {
+        opacity: 0;
+        transform: translateX(35px);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .scroll-reveal-right.is-visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-reveal-scale {
+        opacity: 0;
+        transform: scale(0.94);
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .scroll-reveal-scale.is-visible {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* Staggered children animation */
+      .stagger-children > * {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+      }
+      .stagger-children.is-visible > *:nth-child(1) { transition-delay: 0.04s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(2) { transition-delay: 0.10s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(4) { transition-delay: 0.22s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(5) { transition-delay: 0.28s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(6) { transition-delay: 0.34s; opacity: 1; transform: translateY(0); }
+      .stagger-children.is-visible > *:nth-child(n+7) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }
+
+      /* Page entrance animation */
+      @keyframes page-fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      main {
+        animation: page-fade-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      /* Smooth hover lift for cards */
+      .hover-lift {
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px -8px rgba(20, 40, 29, 0.15);
+      }
+
+      /* Extra bottom padding on mobile to ensure content is never obscured by sticky Book Now */
+      @media (max-width: 1279px) {
+        body {
+          padding-bottom: 5.5rem;
+        }
+      }
+    </style>
+
+    <script is:inline>
+      // Scroll-reveal Intersection Observer with instant above-the-fold activation
+      (function() {
+        const revealClasses = ['.scroll-reveal', '.scroll-reveal-left', '.scroll-reveal-right', '.scroll-reveal-scale', '.stagger-children'];
+        const els = document.querySelectorAll(revealClasses.join(','));
+        if (!els.length) return;
+
+        // Immediately reveal elements already near or above the viewport
+        const winHeight = window.innerHeight || document.documentElement.clientHeight;
+        els.forEach(function(el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= winHeight * 0.95) {
+            el.classList.add('is-visible');
+          }
+        });
+
+        // Observe remaining elements
+        if ('IntersectionObserver' in window) {
+          const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.05,
+            rootMargin: '0px 0px -20px 0px'
+          });
+
+          els.forEach(function(el) {
+            if (!el.classList.contains('is-visible')) {
+              observer.observe(el);
+            }
+          });
+        } else {
+          // Fallback if IntersectionObserver not supported
+          els.forEach(function(el) { el.classList.add('is-visible'); });
+        }
+      })();
+    </script>
+  </body>
+</html>

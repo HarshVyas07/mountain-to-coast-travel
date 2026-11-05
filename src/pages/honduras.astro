@@ -1,0 +1,8 @@
+---
+import DestinationDetail from '../components/DestinationDetail.astro';
+import { destinations } from '../data/destinations';
+
+const destination = destinations.find((d) => d.slug === 'honduras')!;
+---
+
+<DestinationDetail destination={destination} />

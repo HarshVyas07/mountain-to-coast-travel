@@ -1,0 +1,662 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import type { Destination } from '../data/destinations';
+
+interface Props {
+  destination: Destination;
+}
+
+const { destination } = Astro.props;
+
+const siteUrl = 'https://mountainstocoasttravel.com';
+const pageTitle = `Guided Tours of ${destination.country} | USA Guided Tours ${destination.country} | Mountains to Coast`;
+const pageDescription = `Experience premier guided tours of ${destination.country} with USA guided tours specialists Mountains to Coast Travel. ${destination.tagline} Led by veteran US travel guides.`;
+const pageKeywords = `guided tours, usa guided tours, guided tours of ${destination.country}, usa guided tours ${destination.country}, us travel guides, best travel guides, usa travel guides, Latin America group trips, Latin America guided tours, Mountains to travel coast, ${destination.country} guided tours, ${destination.country} group trips`;
+
+// Schema.org Structured Data
+const tourSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristTrip',
+  'name': `Guided Tours of ${destination.country}: ${destination.title}`,
+  'description': pageDescription,
+  'touristType': ['Eco-Tourism', 'Small Group Guided Tours', 'Adventure Expeditions'],
+  'offers': {
+    '@type': 'Offer',
+    'price': destination.price.replace(/[^0-9]/g, '') || '2890',
+    'priceCurrency': 'USD',
+    'availability': 'https://schema.org/InStock',
+    'validFrom': '2026-01-01',
+    'url': `${siteUrl}/${destination.slug}`
+  },
+  'provider': {
+    '@type': 'TravelAgency',
+    'name': 'Mountains to Coast Travel',
+    'url': siteUrl,
+    'telephone': '+1-443-722-5210'
+  },
+  'itinerary': destination.itinerary.map((day) => ({
+    '@type': 'Day',
+    'name': `Day ${day.day}: ${day.title}`,
+    'description': day.description
+  }))
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': `${siteUrl}/`
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Latin America Guided Tours',
+      'item': `${siteUrl}/tours`
+    },
+    {
+      '@type': 'ListItem',
+      'position': 3,
+      'name': `Guided Tours of ${destination.country}`,
+      'item': `${siteUrl}/${destination.slug}`
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  image={destination.heroImage}
+  type="article"
+  schema={[tourSchema, breadcrumbSchema]}
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface">
+
+    <!-- Hero Section with Ultra-HD Background -->
+    <section class="relative w-full min-h-[520px] lg:min-h-[620px] flex items-end overflow-hidden bg-primary text-surface">
+      <div
+        class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105"
+        style={`background-image: url('${destination.heroImage}');`}
+      ></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#011209] via-[#011209]/75 to-[#011209]/30"></div>
+
+      <div class="relative z-10 max-w-[1440px] mx-auto w-full px-margin md:px-margin-md lg:px-margin-lg pt-24 pb-12 flex flex-col gap-4">
+        
+        <!-- Breadcrumb & Badge -->
+        <div class="flex flex-wrap items-center gap-3">
+          <nav aria-label="Breadcrumb" class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md uppercase tracking-widest text-xs">
+            <a href="/" class="hover:underline opacity-80 hover:opacity-100">Home</a>
+            <span>/</span>
+            <a href="/tours" class="hover:underline opacity-80 hover:opacity-100">Latin America Guided Tours</a>
+            <span>/</span>
+            <span class="text-surface font-semibold">Guided Tours of {destination.country}</span>
+          </nav>
+
+          <span class="bg-secondary-fixed text-primary font-label-md text-[11px] uppercase tracking-wider px-3 py-0.5 rounded-full font-bold shadow-sm">
+            {destination.badge}
+          </span>
+          <span class="bg-primary/80 backdrop-blur-md text-surface border border-white/20 font-label-md text-[10px] uppercase tracking-wider px-2.5 py-0.5 rounded-full font-semibold hidden sm:inline">
+            USA Guided Tours {destination.country}
+          </span>
+        </div>
+
+        <!-- Title & Tagline -->
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-surface font-normal tracking-tight max-w-4xl drop-shadow-md">
+          {destination.title}
+        </h1>
+
+        <p class="font-subhead text-subhead md:text-xl text-surface/90 max-w-2xl leading-relaxed drop-shadow-sm">
+          {destination.tagline}
+        </p>
+
+        <!-- Quick Facts Pill Bar -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-white/15 max-w-4xl text-surface">
+          <div class="flex items-center gap-2 bg-surface/10 backdrop-blur-md p-2.5 rounded-xl border border-white/10">
+            <span class="material-symbols-outlined text-[20px] text-secondary-fixed">calendar_month</span>
+            <div>
+              <span class="block font-caption text-[10px] uppercase tracking-wider opacity-75">Duration</span>
+              <span class="font-label-md text-xs font-bold">{destination.duration}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 bg-surface/10 backdrop-blur-md p-2.5 rounded-xl border border-white/10">
+            <span class="material-symbols-outlined text-[20px] text-secondary-fixed">payments</span>
+            <div>
+              <span class="block font-caption text-[10px] uppercase tracking-wider opacity-75">Starting From</span>
+              <span class="font-label-md text-xs font-bold">{destination.price}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 bg-surface/10 backdrop-blur-md p-2.5 rounded-xl border border-white/10">
+            <span class="material-symbols-outlined text-[20px] text-secondary-fixed">groups</span>
+            <div>
+              <span class="block font-caption text-[10px] uppercase tracking-wider opacity-75">Scale</span>
+              <span class="font-label-md text-xs font-bold">{destination.practicalInfo.groupSize}</span>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 bg-surface/10 backdrop-blur-md p-2.5 rounded-xl border border-white/10">
+            <span class="material-symbols-outlined text-[20px] text-secondary-fixed">support_agent</span>
+            <div>
+              <span class="block font-caption text-[10px] uppercase tracking-wider opacity-75">Field Leaders</span>
+              <span class="font-label-md text-xs font-bold">Michael &amp; Maria</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sticky Sub-Nav Anchor Strip -->
+    <nav class="sticky top-20 z-30 bg-surface-container-low/95 backdrop-blur-md border-b border-outline-variant/30 py-3 shadow-sm">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between gap-4 overflow-x-auto text-xs font-label-md uppercase tracking-wider">
+        <div class="flex items-center gap-6 shrink-0">
+          <a href="#dates" class="text-on-surface hover:text-primary transition-colors font-semibold">Departure Dates</a>
+          <a href="#overview" class="text-on-surface hover:text-primary transition-colors font-semibold">Overview</a>
+          <a href="#itinerary" class="text-primary font-bold border-b-2 border-primary pb-0.5">Full Itinerary</a>
+          <a href="#photos" class="text-on-surface hover:text-primary transition-colors font-semibold">Photos</a>
+          <a href="#dos-donts" class="text-on-surface hover:text-primary transition-colors font-semibold">Do's &amp; Don'ts</a>
+          <a href="#inclusions" class="text-on-surface hover:text-primary transition-colors font-semibold">Inclusions</a>
+        </div>
+        <a
+          href={`/contact?destination=${destination.slug}`}
+          class="shrink-0 bg-primary text-on-primary px-4 py-1.5 rounded-lg hover:bg-primary-container transition-all shadow-sm font-bold"
+        >
+          {destination.departures[0] === 'Date Not Planned' ? 'Inquire (Groups 5+)' : 'Reserve Spot'}
+        </a>
+      </div>
+    </nav>
+
+    <!-- Departure Dates & Guarantee Section -->
+    <section id="dates" class="w-full py-space-xl bg-surface-container-lowest border-b border-outline-variant/30 scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+          <div class="lg:col-span-5 flex flex-col gap-2 scroll-reveal-left">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+              {destination.departures[0] === 'Date Not Planned' ? 'Departure Status' : 'Scheduled Calendar'}
+            </span>
+            <h2 class="font-headline-md text-headline-md text-primary font-normal">
+              {destination.departures[0] === 'Date Not Planned' ? 'Calendar Departure Status' : 'Upcoming Confirmed Departure'}
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              {destination.departures[0] === 'Date Not Planned'
+                ? 'As of now, public group calendar dates are not scheduled for this destination. However, custom private departures for family & friends groups of 5+ can be arranged year-round.'
+                : 'Every expedition operates with small, friendly groups. If minimum guest numbers are ever unmet, your deposit is 100% fully refunded.'}
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 flex flex-col sm:flex-row gap-3 scroll-reveal-right">
+            {destination.departures[0] === 'Date Not Planned' ? (
+              <div class="flex-1 bg-surface-container-low p-space-md sm:p-space-lg rounded-2xl border border-outline-variant/40 flex flex-col justify-between shadow-sm">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-label-md text-[11px] bg-surface-container-high text-on-surface-variant px-2.5 py-1 rounded font-bold uppercase flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[15px]">event_busy</span>
+                      Date Not Planned
+                    </span>
+                    <span class="font-label-md text-xs text-secondary font-bold">
+                      Custom Groups 5+ Welcome
+                    </span>
+                  </div>
+                  <h3 class="font-headline-sm text-[16px] text-primary font-bold leading-snug">
+                    Public Group Dates Not Currently Scheduled
+                  </h3>
+                  <p class="font-body-md text-sm text-on-surface-variant mt-2 leading-relaxed">
+                    Have a group of five or more friends or family? We can tailor this exact route to your chosen season and preferred pace, with Michael or Maria directly leading your journey.
+                  </p>
+                </div>
+                <div class="mt-4 pt-3 border-t border-surface-container-highest flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <span class="font-label-md text-xs text-primary font-bold">Private Group of 5+: Available on Request</span>
+                  <a
+                    href={`/contact?destination=${destination.slug}&type=family-friends`}
+                    class="bg-primary text-on-primary px-4 py-2 rounded-xl font-label-md text-xs uppercase tracking-wider hover:bg-primary-container transition-all text-center font-bold inline-flex items-center justify-center gap-1.5"
+                  >
+                    <span>Request Custom Dates</span>
+                    <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+            ) : (
+              destination.departures.map((date) => (
+                <div class="flex-1 bg-surface-container-low p-space-md sm:p-space-lg rounded-2xl border-2 border-secondary/60 flex flex-col justify-between shadow-md hover:border-primary transition-all">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="font-label-md text-[11px] bg-primary text-on-primary px-2.5 py-0.5 rounded font-bold uppercase flex items-center gap-1 shadow-sm">
+                        <span class="material-symbols-outlined text-[14px]">verified</span>
+                        Reservations Open
+                      </span>
+                      <span class="font-label-md text-xs text-secondary font-bold">
+                        {destination.daysCount} Days / {destination.nightsCount} Nights
+                      </span>
+                    </div>
+                    <h3 class="font-headline-sm text-lg text-primary font-bold leading-snug mt-2">
+                      {date}
+                    </h3>
+                    <span class="font-caption text-caption text-on-surface-variant block mt-1">
+                      Directly accompanied by native host Maria &amp; Michael
+                    </span>
+                  </div>
+                  <div class="mt-4 pt-3 border-t border-surface-container-highest flex items-center justify-between">
+                    <span class="font-headline-sm text-sm text-primary font-bold">{destination.price}</span>
+                    <a
+                      href={`/contact?destination=${destination.slug}&date=${encodeURIComponent(date)}`}
+                      class="bg-primary text-on-primary px-4 py-2 rounded-xl font-label-md text-[11px] uppercase tracking-wider hover:bg-primary-container font-bold inline-flex items-center gap-1 shadow-sm"
+                    >
+                      <span>Reserve Your Spot</span>
+                      <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                    </a>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Overview & Expedition Highlights -->
+    <section id="overview" class="w-full py-space-2xl bg-surface scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+          
+          <div class="lg:col-span-7 flex flex-col gap-space-md scroll-reveal-left">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+              Guided Tours of {destination.country} &bull; USA Guided Tours
+            </span>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight">
+              Latin America Group Trips: Grounded in Culture, Safety, and Joy
+            </h2>
+            {destination.overview.map((para) => (
+              <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                {para}
+              </p>
+            ))}
+
+            <div class="p-space-md bg-surface-container-low rounded-2xl border-l-4 border-primary mt-2">
+              <span class="font-label-md uppercase tracking-wider text-primary font-bold block mb-1">
+                The Mountains to Coast Difference &bull; Best US Travel Guides
+              </span>
+              <p class="font-body-md text-primary italic font-medium">
+                "We don't use intermediaries or third-party wholesalers. As seasoned US travel guides, Michael and Maria lead our Latin America guided tours personally from airport greeting to farewell dinner, ensuring authentic cultural immersion and total peace of mind."
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 bg-surface-container-low p-space-lg md:p-space-xl rounded-3xl border border-outline-variant/40 shadow-sm scroll-reveal-right">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary font-semibold block mb-2">
+              Expedition Highlights
+            </span>
+            <h3 class="font-headline-sm text-headline-sm text-primary mb-space-md">
+              What Sets This Journey Apart
+            </h3>
+            <ul class="space-y-3 font-body-md text-body-md text-on-surface">
+              {destination.highlights.map((highlight) => (
+                <li class="flex items-start gap-3">
+                  <div class="w-6 h-6 rounded-full bg-primary text-secondary-fixed flex items-center justify-center shrink-0 mt-0.5">
+                    <span class="material-symbols-outlined text-[15px]">check</span>
+                  </div>
+                  <span class="leading-relaxed">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-space-lg pt-space-md border-t border-surface-container-highest">
+              <a
+                href={`/contact?destination=${destination.slug}`}
+                class="w-full inline-flex items-center justify-center gap-2 bg-primary text-on-primary py-3 px-4 rounded-xl font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container transition-colors font-bold text-center shadow-sm"
+              >
+                <span>Ask Michael &amp; Maria a Question</span>
+                <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Full Day-by-Day Itinerary -->
+    <section id="itinerary" class="w-full py-space-2xl bg-surface-container-lowest border-t border-b border-outline-variant/30 scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="max-w-3xl mx-auto text-center mb-space-2xl scroll-reveal">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+            Day-by-Day Progression
+          </span>
+          <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight mt-1">
+            Full Detailed Itinerary
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+            Every day is thoughtfully paced to balance guided exploration, wildlife observation, cultural immersion, and restorative free time.
+          </p>
+        </div>
+
+        <!-- Itinerary Timeline -->
+        <div class="max-w-4xl mx-auto flex flex-col gap-space-lg relative before:absolute before:top-4 before:bottom-4 before:left-4 sm:before:left-8 before:w-0.5 before:bg-outline-variant/40">
+          
+          {destination.itinerary.map((day) => (
+            <div class="relative pl-12 sm:pl-20 scroll-reveal">
+              
+              <!-- Day Number Badge Marker -->
+              <div class="absolute left-0 sm:left-4 top-0 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary text-secondary-fixed font-label-lg text-label-lg font-bold flex items-center justify-center shadow-md ring-4 ring-surface-container-lowest">
+                {day.day}
+              </div>
+
+              <!-- Content Card -->
+              <div class="bg-surface-container-low p-space-md sm:p-space-lg rounded-2xl border border-outline-variant/30 shadow-sm hover:shadow-md transition-shadow">
+                
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <div class="flex items-center gap-2">
+                    <span class="font-label-md text-xs uppercase tracking-wider bg-primary/10 text-primary px-2.5 py-0.5 rounded font-bold">
+                      Day {day.day}
+                    </span>
+                    <span class="flex items-center gap-1 font-label-md text-xs text-secondary font-semibold">
+                      <span class="material-symbols-outlined text-[14px]">pin_drop</span>
+                      {day.location}
+                    </span>
+                  </div>
+
+                  <div class="flex items-center gap-3 text-caption font-caption text-on-surface-variant">
+                    <span class="flex items-center gap-1">
+                      <span class="material-symbols-outlined text-[14px] text-primary">restaurant</span>
+                      {day.meals}
+                    </span>
+                  </div>
+                </div>
+
+                <h3 class="font-headline-sm text-headline-sm text-primary mb-2 font-medium">
+                  {day.title}
+                </h3>
+
+                <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                  {day.description}
+                </p>
+
+                <!-- Daily Highlights Pills -->
+                <div class="mt-space-md pt-space-sm border-t border-surface-container-highest flex flex-wrap items-center justify-between gap-2">
+                  <div class="flex flex-wrap items-center gap-1.5">
+                    {day.highlights.map((item) => (
+                      <span class="bg-surface-container-lowest text-primary font-caption text-[11px] px-2.5 py-1 rounded-md border border-outline-variant/30">
+                        • {item}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span class="font-caption text-[11px] text-on-surface-variant italic">
+                    Lodging: <strong>{day.stay}</strong>
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Destination Photo Gallery -->
+    <section id="photos" class="w-full py-space-2xl bg-surface scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl scroll-reveal">
+          <div>
+            <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+              Visual Impressions
+            </span>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight mt-1">
+              {destination.country} in High Resolution
+            </h2>
+            <p class="font-subhead text-subhead text-on-surface-variant mt-1">
+              Glimpses of the pristine ecosystems, colonial courtyards, and warm moments awaiting you.
+            </p>
+          </div>
+
+          <a
+            href="/gallery"
+            class="inline-flex items-center gap-1 font-label-md text-label-md uppercase tracking-wider text-primary hover:text-secondary font-bold"
+          >
+            <span>View Full Field Archive Gallery</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md stagger-children">
+          {destination.galleryImages.map((photo) => (
+            <div class="group relative rounded-2xl overflow-hidden bg-surface-container h-[280px] shadow-sm hover:shadow-xl transition-all duration-300">
+              <img
+                src={photo.url}
+                alt={photo.caption}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent opacity-85 group-hover:opacity-95 transition-opacity"></div>
+              <div class="absolute bottom-3 left-3 right-3 text-surface">
+                <span class="font-label-md text-[10px] uppercase tracking-wider text-secondary-fixed block font-bold">
+                  {photo.location}
+                </span>
+                <p class="font-caption text-caption text-surface/90 line-clamp-2 mt-0.5">
+                  {photo.caption}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Do's & Don'ts Section (Essential Cultural & Travel Guidance) -->
+    <section id="dos-donts" class="w-full py-space-2xl bg-surface-container-low border-t border-outline-variant/30 scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="max-w-3xl mx-auto text-center mb-space-2xl scroll-reveal">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+            Cultural Etiquette &amp; Practical Advice
+          </span>
+          <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight mt-1">
+            Do's and Don'ts for {destination.country}
+          </h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+            Respect for local cultures and sensitive ecosystems is the foundation of our philosophy. Keep these essential recommendations in mind:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-xl">
+          
+          <!-- The DO'S Column -->
+          <div class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-3xl border border-outline-variant/40 shadow-sm scroll-reveal-left">
+            <div class="flex items-center gap-3 pb-space-md border-b border-surface-container-highest mb-space-md">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[24px]">task_alt</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-primary font-bold">Recommended Do's</h3>
+                <span class="font-caption text-caption text-on-surface-variant">Best practices for an exceptional, respectful trip</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              {destination.dos.map((item, idx) => (
+                <div class="flex items-start gap-3.5 p-3 rounded-xl bg-surface-container-low/50">
+                  <span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <h4 class="font-label-lg text-primary font-bold text-[14px]">
+                      {item.title}
+                    </h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-0.5 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- The DON'TS Column -->
+          <div class="bg-surface-container-lowest p-space-lg md:p-space-xl rounded-3xl border border-outline-variant/40 shadow-sm scroll-reveal-right">
+            <div class="flex items-center gap-3 pb-space-md border-b border-surface-container-highest mb-space-md">
+              <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[24px]">block</span>
+              </div>
+              <div>
+                <h3 class="font-headline-sm text-primary font-bold">Important Don'ts</h3>
+                <span class="font-caption text-caption text-on-surface-variant">Things to avoid for safety, conservation &amp; courtesy</span>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              {destination.donts.map((item, idx) => (
+                <div class="flex items-start gap-3.5 p-3 rounded-xl bg-surface-container-low/50">
+                  <span class="w-6 h-6 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                    {idx + 1}
+                  </span>
+                  <div>
+                    <h4 class="font-label-lg text-primary font-bold text-[14px]">
+                      {item.title}
+                    </h4>
+                    <p class="font-body-md text-body-md text-on-surface-variant mt-0.5 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Inclusions & Practical Information -->
+    <section id="inclusions" class="w-full py-space-2xl bg-surface scroll-mt-28">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl">
+          
+          <!-- Inclusions (7 cols) -->
+          <div class="lg:col-span-7 bg-surface-container-low p-space-lg md:p-space-xl rounded-3xl border border-outline-variant/40 scroll-reveal-left">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">
+              Complete Transparency
+            </span>
+            <h3 class="font-headline-md text-headline-md text-primary font-normal mt-1 mb-space-md">
+              What Is Included in Your Expedition
+            </h3>
+            <ul class="space-y-3 font-body-md text-body-md text-on-surface">
+              {destination.inclusions.map((item) => (
+                <li class="flex items-start gap-3">
+                  <span class="material-symbols-outlined text-[20px] text-secondary shrink-0 mt-0.5">check_circle</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-space-lg pt-space-md border-t border-surface-container-highest text-caption text-caption text-on-surface-variant">
+              Not included: International airfare to/from Latin America, discretionary guide tips, personal souvenirs, and travel insurance (required).
+            </div>
+          </div>
+
+          <!-- Practical Info Fast Sheet (5 cols) -->
+          <div class="lg:col-span-5 bg-surface-container-lowest p-space-lg md:p-space-xl rounded-3xl border border-outline-variant/40 flex flex-col justify-between shadow-sm scroll-reveal-right">
+            <div>
+              <span class="font-label-md text-label-md uppercase tracking-widest text-secondary font-semibold">
+                Expedition Fast Sheet
+              </span>
+              <h3 class="font-headline-sm text-headline-sm text-primary mt-1 mb-space-md">
+                Practical Travel Details
+              </h3>
+
+              <div class="space-y-3 font-body-md text-body-md text-on-surface">
+                <div class="flex items-start justify-between pb-2.5 border-b border-surface-container-high">
+                  <span class="text-on-surface-variant font-medium">Optimal Season</span>
+                  <span class="text-primary font-bold text-right">{destination.practicalInfo.bestSeason}</span>
+                </div>
+                <div class="flex items-start justify-between pb-2.5 border-b border-surface-container-high">
+                  <span class="text-on-surface-variant font-medium">Fitness Level</span>
+                  <span class="text-primary font-bold text-right">{destination.practicalInfo.fitnessLevel}</span>
+                </div>
+                <div class="flex items-start justify-between pb-2.5 border-b border-surface-container-high">
+                  <span class="text-on-surface-variant font-medium">Languages</span>
+                  <span class="text-primary font-bold text-right">{destination.practicalInfo.language}</span>
+                </div>
+                <div class="flex items-start justify-between pb-2.5 border-b border-surface-container-high">
+                  <span class="text-on-surface-variant font-medium">Currency</span>
+                  <span class="text-primary font-bold text-right">{destination.practicalInfo.currency}</span>
+                </div>
+                <div class="flex items-start justify-between pb-2.5 border-b border-surface-container-high">
+                  <span class="text-on-surface-variant font-medium">Direct Guides</span>
+                  <span class="text-primary font-bold text-right">{destination.practicalInfo.guides}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-space-lg pt-space-md">
+              <a
+                href="https://wa.me/?text=Hello%20Michael%20and%20Maria!%20I%20have%20questions%20about%20the%20"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-2 bg-secondary-fixed text-primary py-3 px-4 rounded-xl font-label-md text-label-md uppercase tracking-wider hover:bg-primary hover:text-on-primary transition-all font-bold text-center"
+              >
+                <span class="material-symbols-outlined text-[18px]">chat</span>
+                <span>WhatsApp Michael &amp; Maria</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Final Call to Action Card -->
+    <section class="w-full py-space-2xl bg-primary-container text-on-primary relative overflow-hidden">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg text-center relative z-10 scroll-reveal-scale">
+        <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed font-semibold">
+          Reserve Your Place for 2026 – 2027
+        </span>
+        <h2 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-on-primary font-normal mt-2 max-w-3xl mx-auto">
+          Ready to Explore {destination.country} with Michael &amp; Maria?
+        </h2>
+        <p class="font-subhead text-subhead text-on-primary/85 mt-4 max-w-2xl mx-auto leading-relaxed">
+          Small groups of 8 to 15 travelers ensure meaningful connection, personal attention, and genuine hospitality. Secure your spot or design a private family departure.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-space-lg">
+          <a
+            href={`/contact?destination=${destination.slug}`}
+            class="bg-secondary-fixed text-primary px-space-xl py-space-sm rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary hover:text-on-primary transition-all font-bold shadow-lg"
+          >
+            Book This Trip Now
+          </a>
+          <a
+            href="/contact?type=family-friends"
+            class="bg-surface/10 backdrop-blur-md text-surface border border-white/20 px-space-lg py-space-sm rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface/20 transition-all font-bold"
+          >
+            Custom Family Departure (5+ Guests)
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

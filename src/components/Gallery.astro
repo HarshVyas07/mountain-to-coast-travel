@@ -1,0 +1,121 @@
+---
+// Asymmetrical editorial photo gallery
+---
+
+<section id="gallery" class="w-full py-space-2xl bg-surface scroll-mt-20">
+  <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-2xl scroll-reveal">
+      <div class="flex flex-col gap-space-xs max-w-xl">
+        <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container">In The Field</span>
+        <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight">Moments Captured</h2>
+        <p class="font-subhead text-subhead text-on-surface-variant">
+          Unrehearsed glimpses documented by our expedition naturalists and discerning travelers across the isthmus.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-space-sm text-secondary font-label-md text-label-md tracking-wider uppercase">
+        <div class="flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-[18px]">photo_camera</span>
+          <span>Archive Vol. 24 • 35mm &amp; Medium Format</span>
+        </div>
+        <a href="/gallery" class="inline-flex items-center gap-1 text-primary hover:text-secondary font-bold pl-2 border-l border-outline-variant">
+          Explore Full Gallery <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Asymmetrical Masonry Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-space-md stagger-children">      <!-- Photo A (Tall Portrait - 5 cols) -->
+      <div class="md:col-span-5 relative group overflow-hidden rounded-2xl bg-surface-container h-[480px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+        <img
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src="/assets/images/IMG_5223.jpg"
+          alt="Lush rainforest waterfall plunge pool"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-lg text-surface">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Rainforest &amp; Waterfalls</span>
+          <p class="font-headline-sm text-headline-sm font-medium">Emerald Plunge Pools &amp; Virgin Forest Sanctuaries</p>
+          <span class="text-xs text-surface/80 mt-1">Field photo documented by expedition naturalists</span>
+        </div>
+      </div>
+
+      <!-- Photos B, C, D Stack (7 cols) -->
+      <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+
+        <!-- Photo B (Landscape - span 2) -->
+        <div class="sm:col-span-2 relative group overflow-hidden rounded-2xl bg-surface-container h-[228px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+          <img
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src="/assets/images/IMG_2856.jpg"
+            alt="Volcanic crater lagoon and emerald mountain rim"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-md text-surface">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Laguna de Apoyo &amp; Volcanic Cordillera</span>
+            <p class="font-body-md text-body-md font-medium">Thermal mineral waters resting within a dormant crater caldera</p>
+          </div>
+        </div>
+
+        <!-- Photo C -->
+        <div class="relative group overflow-hidden rounded-2xl bg-surface-container h-[236px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+          <img
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src="/assets/images/IMG_4168.jpg"
+            alt="Suspension footbridge across river canyon gorge"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-md text-surface">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Highland Canyon Passage</span>
+            <p class="font-body-md text-body-md font-medium">Suspended walkway traversing untouched river gorges</p>
+          </div>
+        </div>
+
+        <!-- Photo D -->
+        <div class="relative group overflow-hidden rounded-2xl bg-surface-container h-[236px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+          <img
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            src="/assets/images/IMG_4205.jpg"
+            alt="Tropical coastal beach and mountain backdrop"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-md text-surface">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Coastal Sanctuaries</span>
+            <p class="font-body-md text-body-md font-medium">Gentle sea breezes and palm-fringed tropical waters</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Photos E & F Row -->
+      <!-- Photo E (7 cols) -->
+      <div class="md:col-span-7 relative group overflow-hidden rounded-2xl bg-surface-container h-[340px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+        <img
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src="/assets/images/IMG_5390.jpg"
+          alt="Aerial view of turquoise shoreline and thatch palapas"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-lg text-surface">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Caribbean &amp; Island Paradises</span>
+          <p class="font-headline-sm text-headline-sm font-medium">Crystal turquoise shallows and secluded island shores</p>
+        </div>
+      </div>
+
+      <!-- Photo F (5 cols) -->
+      <div class="md:col-span-5 relative group overflow-hidden rounded-2xl bg-surface-container h-[340px] shadow-md hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+        <img
+          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          src="/assets/images/IMG_5521.jpg"
+          alt="Wooden boardwalk and dock over clear blue water"
+          loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-space-lg text-surface">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed">Lake &amp; Coastal Harbors</span>
+          <p class="font-headline-sm text-headline-sm font-medium">Boardwalk passages over calm Latin American waters</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

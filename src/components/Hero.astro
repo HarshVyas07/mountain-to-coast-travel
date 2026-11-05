@@ -1,0 +1,313 @@
+---
+// Hero Section with editorial slider & trip finder
+const heroImages = [
+  { id: 1, img: '/assets/webimg/1.jpg', tag: '01 Rainforest', title: 'Monteverde Cloud Forest' },
+  { id: 2, img: '/assets/webimg/2.jpg', tag: '02 Highlands', title: 'Highland Canyon Gorge' },
+  { id: 3, img: '/assets/webimg/3.jpg', tag: '03 Caribbean', title: 'Corn Island White Sands' },
+  { id: 4, img: '/assets/webimg/4.jpg', tag: '04 Waterfalls', title: 'Emerald Plunge Pools' },
+  { id: 5, img: '/assets/webimg/5.jpg', tag: '05 Volcanoes', title: 'Majestic Volcanic Peaks' },
+  { id: 6, img: '/assets/webimg/6.jpg', tag: '06 Coastlines', title: 'Pacific Littoral Sanctuaries' },
+  { id: 7, img: '/assets/webimg/7.jpg', tag: '07 Sanctuaries', title: 'Turquoise Coral Lagoons' },
+  { id: 8, img: '/assets/webimg/8.jpg', tag: '08 Heritage', title: 'Historic Colonial Atriums' },
+  { id: 28, img: '/assets/webimg/28.jpg', tag: '09 Imperial', title: 'Ancient Mountain Terrains' },
+  { id: 29, img: '/assets/webimg/29.jpg', tag: '10 Calderas', title: 'Volcanic Crater Lagoons' },
+  { id: 30, img: '/assets/webimg/30.jpg', tag: '11 Reefs', title: 'Barrier Reef Cays' },
+  { id: 31, img: '/assets/webimg/31.jpg', tag: '12 Andes', title: 'Sacred Valley & High Summits' },
+  { id: 32, img: '/assets/webimg/32.jpg', tag: '13 Citadels', title: 'Mystical Mountain Citadels' },
+  { id: 33, img: '/assets/webimg/33.jpg', tag: '14 Paradises', title: 'Pristine Ocean Horizons' },
+];
+---
+
+<section class="relative w-full -mt-20 overflow-hidden bg-primary min-h-[820px] lg:min-h-[880px] flex flex-col justify-between">
+
+  <!-- Background Slides (Ultra-HD Imagery from assets/webimg: 1,2,3,4,5,6,7,8,28,29,30,31,32,33) -->
+  <div id="hero-slider" class="absolute inset-0 w-full h-full">
+    {heroImages.map((slide, index) => (
+      <div
+        class={`hero-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+          index === 0 ? 'opacity-100' : 'opacity-0'
+        } bg-cover bg-center`}
+        style={`background-image: url('${slide.img}')`}
+      >
+        <div class="absolute inset-0 bg-gradient-to-t from-[#011209] via-[#011209]/50 to-black/30"></div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 max-w-[1440px] mx-auto w-full px-margin md:px-margin-md lg:px-margin-lg pt-36 pb-24 flex-1 flex flex-col justify-end">
+
+    <!-- Slide Indicators & Controls Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-space-lg">
+      <div class="flex items-center gap-2 overflow-x-auto max-w-full pb-1">
+        <div class="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10" id="slide-indicators-container">
+          {heroImages.map((slide, index) => (
+            <button
+              class={`slide-indicator group flex items-center gap-1 py-1 px-1.5 text-surface cursor-pointer rounded-full transition-all ${index === 0 ? 'active' : ''}`}
+              onclick={`switchSlide(${index})`}
+              type="button"
+              aria-label={`Slide ${index + 1}: ${slide.title}`}
+            >
+              <span class={`h-[3px] rounded-full transition-all block ${index === 0 ? 'w-8 bg-tertiary-fixed' : 'w-2 bg-white/40 group-hover:bg-white/80'}`}></span>
+            </button>
+          ))}
+        </div>
+
+        <!-- Slide Counter & Controls -->
+        <div class="flex items-center gap-2 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 text-surface text-xs font-label-md">
+          <button
+            type="button"
+            onclick="prevSlide()"
+            class="hover:text-secondary-fixed transition-colors flex items-center justify-center p-0.5 cursor-pointer"
+            aria-label="Previous slide"
+          >
+            <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+          </button>
+          <span id="slide-counter-display" class="font-bold tracking-wider text-secondary-fixed">01 / 14</span>
+          <button
+            type="button"
+            onclick="nextSlide()"
+            class="hover:text-secondary-fixed transition-colors flex items-center justify-center p-0.5 cursor-pointer"
+            aria-label="Next slide"
+          >
+            <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <span class="text-secondary-fixed font-label-md text-label-md uppercase tracking-wider hidden sm:inline-flex items-center gap-1.5 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+        <span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-ping"></span>
+        <span>Latin America Expeditions Season</span>
+      </span>
+    </div>
+
+    <!-- Main Grid: Headline & 3D Interactive Element -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-end">
+      
+      <!-- Headline & CTAs (Left 8 cols) -->
+      <div class="lg:col-span-8 max-w-3xl">
+        <div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface/10 backdrop-blur-md mb-space-md text-surface border border-white/10 shadow-sm">
+          <span class="material-symbols-outlined text-[16px] text-tertiary-fixed">landscape</span>
+          <span class="font-label-md text-label-md uppercase tracking-widest">USA Guided Tours &bull; Latin America Group Trips</span>
+        </div>
+
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-surface font-normal tracking-tight leading-none text-balance">
+          Latin America Guided Tours: From Volcanic Peaks to Pacific Shores &amp; Andean Heights.
+        </h1>
+
+        <p class="font-subhead text-subhead text-surface/90 mt-space-md max-w-2xl leading-relaxed drop-shadow-sm">
+          Discover the best guided tours and group trips through Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador, and Peru. Led personally by premier US travel guides from Mountains to Coast Travel.
+        </p>
+
+        <!-- CTA Row -->
+        <div class="flex flex-wrap items-center gap-space-md mt-space-xl">
+          <a
+            href="/tours"
+            class="group inline-flex items-center justify-center gap-2 bg-surface text-primary px-space-lg py-space-md rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-low transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
+          >
+            <span>Explore Upcoming Tours</span>
+            <span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+          </a>
+          <button
+            class="inline-flex items-center gap-space-xs text-surface px-space-md py-space-md rounded font-label-lg text-label-lg uppercase tracking-wider hover:text-secondary-fixed transition-colors cursor-pointer group"
+            onclick="openFilmModal()"
+            type="button"
+          >
+            <span class="w-10 h-10 rounded-full bg-surface/15 border border-white/20 flex items-center justify-center backdrop-blur-md group-hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-[22px] text-surface" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            </span>
+            <span>Watch Expedition Film</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D Floating Interactive Element (Right 4 cols) -->
+      <div class="lg:col-span-4 hidden lg:flex justify-end">
+        <div 
+          id="hero-3d-card"
+          class="hero-3d-perspective w-full max-w-xs"
+        >
+          <div class="hero-3d-inner bg-surface/10 backdrop-blur-xl border border-white/20 rounded-2xl p-space-lg shadow-2xl text-surface transition-transform duration-300">
+            <!-- 3D Floating Compass Badge -->
+            <div class="flex items-center justify-between pb-space-md border-b border-white/10">
+              <div class="flex items-center gap-space-xs">
+                <div class="w-10 h-10 rounded-xl bg-tertiary-container/30 border border-tertiary-fixed/40 flex items-center justify-center text-tertiary-fixed shadow-inner animate-[spin_25s_linear_infinite]">
+                  <span class="material-symbols-outlined text-[24px]">explore</span>
+                </div>
+                <div>
+                  <span class="block font-label-md text-[11px] uppercase tracking-widest text-secondary-fixed font-bold">Latin America Traverse</span>
+                  <span class="block font-caption text-caption text-surface/70">Pan-American Isthmus &amp; Andes</span>
+                </div>
+              </div>
+              <span class="w-2.5 h-2.5 rounded-full bg-tertiary-fixed animate-ping"></span>
+            </div>
+
+            <!-- Guarantee Highlights -->
+            <div class="py-space-md space-y-space-sm">
+              <div class="flex items-center gap-space-xs text-surface/90">
+                <span class="material-symbols-outlined text-secondary-fixed text-[18px]">verified</span>
+                <span class="font-body-md text-xs font-semibold">100% Refund Guarantee</span>
+              </div>
+              <div class="flex items-center gap-space-xs text-surface/90">
+                <span class="material-symbols-outlined text-secondary-fixed text-[18px]">groups</span>
+                <span class="font-body-md text-xs">Small Group &amp; Private 5+</span>
+              </div>
+              <div class="flex items-center gap-space-xs text-surface/90">
+                <span class="material-symbols-outlined text-secondary-fixed text-[18px]">person_pin_circle</span>
+                <span class="font-body-md text-xs">Led by Michael &amp; Maria</span>
+              </div>
+            </div>
+
+            <!-- Footer Badge -->
+            <a 
+              href="/about" 
+              class="block w-full text-center py-2 px-3 rounded-lg bg-surface/20 hover:bg-surface/30 text-surface font-label-md text-[11px] uppercase tracking-widest transition-all border border-white/10 mt-space-xs"
+            >
+              Meet Your Field Guides →
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Expedition Film Modal -->
+<div id="film-modal" class="fixed inset-0 z-[100] bg-primary/95 backdrop-blur-md hidden items-center justify-center p-space-md">
+  <div class="relative w-full max-w-4xl bg-surface-container-lowest rounded-xl overflow-hidden shadow-2xl">
+    <div class="flex items-center justify-between p-space-md bg-surface-container-high border-b border-surface-container-highest">
+      <span class="font-label-lg text-label-lg uppercase tracking-wider text-primary">Mountains to Coast • Latin America Cinematic Preview</span>
+      <button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface hover:bg-surface-variant transition-colors" onclick="closeFilmModal()" type="button">
+        <span class="material-symbols-outlined text-[20px]">close</span>
+      </button>
+    </div>
+    <div class="relative aspect-video bg-primary flex items-center justify-center">
+      <img
+        class="w-full h-full object-cover opacity-75"
+        src="/assets/webimg/28.jpg"
+        alt="Latin America guided tours expedition film preview"
+      />
+      <div class="absolute flex flex-col items-center gap-space-sm text-surface">
+        <div class="w-16 h-16 rounded-full bg-tertiary-container/80 backdrop-blur-md flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-xl">
+          <span class="material-symbols-outlined text-[32px] text-on-tertiary">play_arrow</span>
+        </div>
+        <span class="font-label-md text-label-md uppercase tracking-widest text-surface/90">Click to stream 4K Latin America Expedition film</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hero-3d-perspective {
+    perspective: 1000px;
+  }
+  .hero-3d-inner {
+    transform-style: preserve-3d;
+    animation: float3d 6s ease-in-out infinite;
+    will-change: transform;
+  }
+  @keyframes float3d {
+    0%, 100% {
+      transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+    }
+    50% {
+      transform: translateY(-8px) rotateX(4deg) rotateY(-4deg);
+    }
+  }
+</style>
+
+<script>
+  // Hero slider
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.hero-slide');
+  const indicators = document.querySelectorAll('.slide-indicator');
+  const counterDisplay = document.getElementById('slide-counter-display');
+  const totalSlides = slides.length;
+
+  function switchSlide(index: number) {
+    currentSlide = (index + totalSlides) % totalSlides;
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('opacity-100', i === currentSlide);
+      slide.classList.toggle('opacity-0', i !== currentSlide);
+    });
+    indicators.forEach((ind, i) => {
+      const bar = ind.querySelector('span');
+      if (bar) {
+        if (i === currentSlide) {
+          bar.className = 'h-[3px] rounded-full transition-all block w-8 bg-tertiary-fixed';
+        } else {
+          bar.className = 'h-[3px] rounded-full transition-all block w-2 bg-white/40 group-hover:bg-white/80';
+        }
+      }
+    });
+    if (counterDisplay) {
+      const curNum = (currentSlide + 1).toString().padStart(2, '0');
+      const totNum = totalSlides.toString().padStart(2, '0');
+      counterDisplay.textContent = `${curNum} / ${totNum}`;
+    }
+  }
+
+  function nextSlide() {
+    switchSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    switchSlide(currentSlide - 1);
+  }
+
+  // Auto-advance every 6s
+  let timer = setInterval(nextSlide, 6000);
+
+  // Pause on hover
+  const sliderContainer = document.getElementById('hero-slider');
+  sliderContainer?.addEventListener('mouseenter', () => clearInterval(timer));
+  sliderContainer?.addEventListener('mouseleave', () => {
+    clearInterval(timer);
+    timer = setInterval(nextSlide, 6000);
+  });
+
+  // Film modal
+  function openFilmModal() {
+    const modal = document.getElementById('film-modal');
+    modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
+  }
+
+  function closeFilmModal() {
+    const modal = document.getElementById('film-modal');
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+  }
+
+  // Close modal on backdrop click
+  document.getElementById('film-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeFilmModal();
+  });
+
+  // 3D Card Interactive Tilt
+  const heroCard = document.getElementById('hero-3d-card');
+  const heroInner = heroCard?.querySelector('.hero-3d-inner') as HTMLElement | null;
+  if (heroCard && heroInner) {
+    heroCard.addEventListener('mousemove', (e) => {
+      const rect = heroCard.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      heroInner.style.animation = 'none';
+      heroInner.style.transform = `perspective(1000px) rotateX(${-y / 14}deg) rotateY(${x / 14}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    heroCard.addEventListener('mouseleave', () => {
+      heroInner.style.animation = 'float3d 6s ease-in-out infinite';
+      heroInner.style.transform = '';
+    });
+  }
+
+  // Expose globally for onclick attrs
+  (window as any).switchSlide = switchSlide;
+  (window as any).nextSlide = nextSlide;
+  (window as any).prevSlide = prevSlide;
+  (window as any).openFilmModal = openFilmModal;
+  (window as any).closeFilmModal = closeFilmModal;
+</script>

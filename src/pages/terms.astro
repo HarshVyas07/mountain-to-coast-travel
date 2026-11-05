@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "Terms & Booking Policy | Mountains to Coast Travel | USA Guided Tours";
+const pageDescription = "Transparent terms, our 100% deposit refund guarantee, and expedition guidelines for Mountains to Coast Travel Latin America guided tours.";
+const pageKeywords = "terms and conditions, booking policy, refund guarantee, Mountains to travel coast, guided tours, usa guided tours, Latin America group trips";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface">
+
+    <!-- Terms Header Hero -->
+    <section class="w-full py-space-xl bg-primary text-surface relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/90 to-primary/60"></div>
+      <div class="relative z-10 max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg pt-12 pb-4">
+        <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md uppercase tracking-widest mb-3">
+          <a href="/" class="hover:underline">Home</a>
+          <span>/</span>
+          <span class="text-surface font-semibold">Terms &amp; Conditions</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-surface font-normal tracking-tight">
+          Terms of Immersion &amp; Booking Charter
+        </h1>
+        <p class="font-subhead text-subhead text-surface/85 mt-3 max-w-2xl">
+          Clear, ethical, and protective agreements designed to ensure your Latin American journey is grounded in trust, safety, and mutual respect.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="w-full py-space-2xl bg-surface">
+      <div class="max-w-[1000px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="space-y-space-xl text-on-surface">
+
+          <!-- Section 1: The 100% Refund Guarantee (PDF Slide 7) -->
+          <div class="p-space-lg md:p-space-xl bg-surface-container-low rounded-2xl border-l-4 border-primary shadow-sm">
+            <div class="flex items-center gap-2 text-on-tertiary-container font-label-md text-label-md uppercase tracking-widest font-bold mb-2">
+              <span class="material-symbols-outlined text-[20px]">verified_user</span>
+              <span>Primary Guarantee (PDF Slide 7)</span>
+            </div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              1. Minimum Participant Quota &amp; 100% Deposit Refund Guarantee
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+              All Mountains to Coast Travel public group expeditions depend upon established minimum and maximum guest capacities (typically 8 to 15 guests) to preserve intimacy and low-impact presence.
+            </p>
+            <p class="font-body-md text-body-md text-primary font-medium leading-relaxed">
+              <strong>Guaranteed Protection:</strong> If the published minimum number of participants for any scheduled tour is not met at least 45 days prior to departure, Mountains to Coast Travel will cancel the tour and immediately refund 100% of your deposit and any payments made, with zero cancellation penalties or administrative deductions.
+            </p>
+          </div>
+
+          <!-- Section 2: Itinerary Flow & Flexibility -->
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              2. Fixed Itineraries with Built-in Flexibility
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              We publish detailed day-by-day itineraries so you always understand the cadence of your trip. However, because our journeys explore dynamic rainforests, volcanic mountain corridors, and ocean tides, our seasoned guides retain the discretion to adapt route timings, boat skiff crossings, or trail choices to guarantee maximum traveler safety and enjoyment. Structured free time is intentionally woven into every journey so you can rest or wander at your personal pace.
+            </p>
+          </div>
+
+          <!-- Section 3: Inclusions and Exclusions -->
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              3. Transparent Inclusions &amp; Pricing
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+              We reject hidden fees. What is included and what is not included is clearly spelled out on every tour brochure and confirmation invoice:
+            </p>
+            <ul class="space-y-2 font-body-md text-body-md text-on-surface pl-4 list-disc">
+              <li><strong>What is Included:</strong> Hand-selected eco-lodges and boutique accommodations, all regional ground and private skiff transit, accredited bilingual guidance by Michael &amp; Maria, domestic chartered flights where noted, all national park and conservation fees, and daily breakfasts plus special regional feasts.</li>
+              <li><strong>What is Typically Excluded:</strong> International round-trip airfare, personal medical/travel insurance, optional individual alcoholic beverages, and discretionary tips for local community porters or drivers.</li>
+            </ul>
+          </div>
+
+          <!-- Section 4: Family & Friends Private Groups (PDF Slide 8) -->
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              4. Family &amp; Friends Custom Group Expeditions (5+ Travelers)
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              For private ready-to-travel groups of five or more, custom itineraries are co-created with Michael and Maria. Dates, lodgings, and excursion styles are locked in upon receipt of group deposits. Changes to group composition or custom route adjustments can be accommodated up to 60 days before arrival.
+            </p>
+          </div>
+
+          <!-- Section 5: Safety, Food & Health Protocols (PDF Slide 3) -->
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              5. Priority for Health, Food Safety &amp; Wellbeing
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Safety is our top priority. Our guides have over two decades of experience in Latin America and will proactively advise travelers on safe drinking water, reliable culinary fincas, and trail precautions. Travelers agree to disclose any dietary restrictions, allergies, or physical limitations prior to departure so our guides can make suitable arrangements. Comprehensive international travel and evacuation insurance is mandatory for all guests.
+            </p>
+          </div>
+
+          <!-- Section 6: Cultural Respect & Ecological Stewardship -->
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              6. Cultural Respect &amp; Ecological Code of Conduct
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              We travel with deep reverence for indigenous traditions and delicate ecosystems. Travelers agree to abide by our Leave-No-Trace trail rules, respect photography requests in sensitive cultural ceremonies, and engage with host communities with dignity and kindness.
+            </p>
+          </div>
+
+          <!-- Section 7: Questions & Direct Inquiries -->
+          <div class="pt-space-lg border-t border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p class="font-label-lg text-primary font-bold">Have Questions About These Terms?</p>
+              <p class="font-caption text-caption text-on-surface-variant">Our founders Michael &amp; Maria are happy to walk you through any question.</p>
+            </div>
+            <a
+              href="/contact"
+              class="bg-primary text-on-primary px-space-md py-2 rounded-lg font-label-md text-label-md uppercase tracking-wider hover:bg-primary-container transition-colors shrink-0"
+            >
+              Contact Our Guides
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

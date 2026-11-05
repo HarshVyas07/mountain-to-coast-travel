@@ -1,0 +1,352 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { destinations } from '../data/destinations';
+
+const pageTitle = "Latin America Guided Tours & Group Trips | USA Guided Tours | Mountains to Coast";
+const pageDescription = "Book premier Latin America guided tours and group trips with Mountains to Coast Travel. Scheduled guided tours of Nicaragua, Costa Rica, Guatemala, Honduras, El Salvador & Peru led by veteran US travel guides.";
+const pageKeywords = "guided tours, usa guided tours, Latin America guided tours, Latin America group trips, us travel guides, best travel guides, usa travel guides, Mountains to travel coast, guided tours of Nicaragua, guided tours of Costa Rica, guided tours of Guatemala, guided tours of Honduras, guided tours of El Salvador, guided tours of Peru, usa guided tours Nicaragua, usa guided tours Costa Rica, usa guided tours Guatemala, usa guided tours Honduras, usa guided tours El Salvador, usa guided tours Peru";
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  'itemListElement': [
+    {
+      '@type': 'ListItem',
+      'position': 1,
+      'name': 'Home',
+      'item': 'https://mountainstocoasttravel.com/'
+    },
+    {
+      '@type': 'ListItem',
+      'position': 2,
+      'name': 'Latin America Guided Tours',
+      'item': 'https://mountainstocoasttravel.com/tours'
+    }
+  ]
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  image="/assets/images/IMG_2856.jpg"
+  schema={breadcrumbSchema}
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface">
+
+    <!-- Page Header Hero (Ultra-HD Background) -->
+    <section class="w-full py-space-2xl bg-primary text-surface relative overflow-hidden">
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/assets/images/IMG_2856.jpg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#011209] via-[#011209]/80 to-[#011209]/45"></div>
+
+      <div class="relative z-10 max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg pt-12 pb-6">
+        <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md uppercase tracking-widest mb-3">
+          <a href="/" class="hover:underline">Home</a>
+          <span>/</span>
+          <span class="text-surface font-semibold">Latin America Guided Tours</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-surface font-normal tracking-tight max-w-4xl">
+          Latin America Guided Tours &amp; Scheduled Group Trips
+        </h1>
+        <p class="font-subhead text-subhead text-surface/85 mt-4 max-w-2xl leading-relaxed">
+          Carefully planned USA guided tours throughout Latin America, balancing adventure and relaxation, mountains and coasts. Established calendar dates, intimate group scale, and direct leadership by veteran US travel guides Michael and Maria.
+        </p>
+
+        <!-- Quick Facts Pill Strip -->
+        <div class="flex flex-wrap items-center gap-3 mt-6 pt-6 border-t border-surface/20">
+          <div class="flex items-center gap-1.5 bg-surface/10 backdrop-blur-md px-3 py-1.5 rounded-full font-label-md text-[12px] uppercase tracking-wider text-surface">
+            <span class="material-symbols-outlined text-[16px] text-tertiary-fixed">event</span>
+            <span>All 6 Latin American Destinations</span>
+          </div>
+          <div class="flex items-center gap-1.5 bg-surface/10 backdrop-blur-md px-3 py-1.5 rounded-full font-label-md text-[12px] uppercase tracking-wider text-surface">
+            <span class="material-symbols-outlined text-[16px] text-secondary-fixed">groups</span>
+            <span>8 – 15 Guests</span>
+          </div>
+          <div class="flex items-center gap-1.5 bg-surface/10 backdrop-blur-md px-3 py-1.5 rounded-full font-label-md text-[12px] uppercase tracking-wider text-surface">
+            <span class="material-symbols-outlined text-[16px] text-tertiary-fixed">verified_user</span>
+            <span>100% Refund Guarantee</span>
+          </div>
+          <div class="flex items-center gap-1.5 bg-surface/10 backdrop-blur-md px-3 py-1.5 rounded-full font-label-md text-[12px] uppercase tracking-wider text-surface">
+            <span class="material-symbols-outlined text-[16px] text-secondary-fixed">translate</span>
+            <span>Fluent English &amp; Spanish Guides</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tour Types Section (From PDF Slide 6) -->
+    <section class="w-full py-space-xl bg-surface-container-low border-b border-outline-variant/30">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        <div class="max-w-2xl mb-space-lg">
+          <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">How We Travel</span>
+          <h2 class="font-headline-md text-headline-md text-primary font-normal mt-1">Four Distinct Expedition Styles</h2>
+          <p class="font-body-md text-body-md text-on-surface-variant mt-2">
+            Whether you join a scheduled public departure or design a private journey for family and friends, all trips embody our core styles:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md stagger-children">
+          <div class="bg-surface-container-lowest p-space-md rounded-xl border border-outline-variant/30">
+            <span class="material-symbols-outlined text-[24px] text-primary mb-2">map</span>
+            <h3 class="font-label-lg text-primary font-bold">Custom Itineraries</h3>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Tailored routes and excursions designed around your specific desires, preferred pace, and selected dates.
+            </p>
+          </div>
+          <div class="bg-surface-container-lowest p-space-md rounded-xl border border-outline-variant/30">
+            <span class="material-symbols-outlined text-[24px] text-primary mb-2">hiking</span>
+            <h3 class="font-label-lg text-primary font-bold">Adventure Planning</h3>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Active hiking, volcanic crater traverses, scenic drives, and exhilarating outdoor encounters in untamed ecosystems.
+            </p>
+          </div>
+          <div class="bg-surface-container-lowest p-space-md rounded-xl border border-outline-variant/30">
+            <span class="material-symbols-outlined text-[24px] text-primary mb-2">forest</span>
+            <h3 class="font-label-lg text-primary font-bold">Nature-Focused Getaways</h3>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Cloud forest sanctuaries, secluded cabins, biological research posts, and immersive flora and fauna discovery.
+            </p>
+          </div>
+          <div class="bg-surface-container-lowest p-space-md rounded-xl border border-outline-variant/30">
+            <span class="material-symbols-outlined text-[24px] text-primary mb-2">surfing</span>
+            <h3 class="font-label-lg text-primary font-bold">Coastline Retreats</h3>
+            <p class="font-caption text-caption text-on-surface-variant mt-1">
+              Relaxing, ocean-inspired travel along Caribbean turquoise atolls and Pacific sunset surf shores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sole Planned 2027 Spotlight Banner: Nicaragua -->
+    <section class="w-full py-space-lg bg-surface border-b border-outline-variant/30">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        <div class="bg-gradient-to-r from-primary via-primary-container to-primary text-on-primary rounded-3xl p-space-lg md:p-space-xl shadow-xl flex flex-col lg:flex-row items-center justify-between gap-6 border-2 border-secondary/40">
+          <div class="flex-1 space-y-2">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-secondary-fixed text-primary px-3 py-0.5 rounded-full font-label-md text-[11px] font-bold uppercase tracking-wider">
+                Confirmed 2027 Departure
+              </span>
+              <span class="bg-white/15 backdrop-blur-md text-surface px-3 py-0.5 rounded-full font-label-md text-[11px] font-semibold uppercase tracking-wider">
+                Feb 28 — Mar 7, 2027 • 9 Days 8 Nights
+              </span>
+              <span class="bg-emerald-400 text-black px-3 py-0.5 rounded-full font-label-md text-[11px] font-bold uppercase tracking-wider">
+                Reservations Open
+              </span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-surface font-normal">
+              Nicaragua — Nature is waiting for you in Nicaragua
+            </h2>
+            <p class="font-body-md text-surface/90 max-w-3xl leading-relaxed text-sm">
+              Join us in 2027 and discover one of the most beautiful and authentic countries in Latin America. Walk the colorful colonial streets of Granada, sail across Lake Nicaragua to twin-volcano Ometepe Island, fly to the Caribbean side to white-sand Corn Island, swim in volcanic Laguna de Apoyo, taste the best coffee, and watch for our national bird, the Guardabarranco. Viajemos juntos!
+            </p>
+          </div>
+          <div class="flex flex-col sm:flex-row items-center gap-3 shrink-0">
+            <a
+              href="/nicaragua"
+              class="bg-surface text-primary px-5 py-3 rounded-xl font-label-lg text-xs uppercase tracking-wider font-bold hover:bg-surface-container transition-all shadow-md"
+            >
+              View 9-Day Itinerary
+            </a>
+            <a
+              href="/contact?destination=nicaragua&date=Feb+28+-+Mar+7,+2027"
+              class="bg-secondary-fixed text-primary px-6 py-3 rounded-xl font-label-lg text-xs uppercase tracking-wider font-bold hover:bg-primary-container hover:text-on-primary transition-all shadow-md"
+            >
+              Reserve Spot Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Tours List (All 6 Destinations) -->
+    <section class="w-full py-space-2xl bg-surface">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-2xl scroll-reveal">
+          <div>
+            <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-semibold">Latin America Expeditions</span>
+            <h2 class="font-headline-lg text-headline-lg text-primary font-normal tracking-tight mt-1">All 6 Destination Expeditions</h2>
+            <p class="font-subhead text-subhead text-on-surface-variant max-w-xl mt-1">
+              Currently, Nicaragua is our active planned departure for 2027. All other destinations are open for custom private groups of 5+ travelers or future waitlist.
+            </p>
+          </div>
+          <a
+            href="/contact"
+            class="bg-primary text-on-primary px-space-lg py-space-sm rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container transition-all shrink-0 inline-flex items-center gap-2"
+          >
+            <span>Inquire About A Date</span>
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+          </a>
+        </div>
+
+        <!-- Tours Stack: All 6 Destinations -->
+        <div class="space-y-space-2xl">
+          {destinations.map((tour, index) => (
+            <article
+              id={tour.slug}
+              class="scroll-mt-24 bg-surface-container-low rounded-3xl overflow-hidden border border-outline-variant/40 shadow-sm flex flex-col lg:flex-row scroll-reveal group hover:shadow-xl transition-all"
+            >
+              <!-- Image Column (5 cols) -->
+              <div class="lg:w-5/12 relative min-h-[340px] lg:min-h-full overflow-hidden bg-surface-container">
+                <a href={`/${tour.slug}`} class="block w-full h-full">
+                  <img
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={tour.heroImage}
+                    alt={`${tour.country} landscape`}
+                    loading={index > 0 ? 'lazy' : 'eager'}
+                  />
+                </a>
+                <div class="absolute top-4 left-4 flex flex-wrap gap-2 pointer-events-none">
+                  <span class="bg-primary-container text-on-primary font-label-md text-label-md uppercase tracking-wider px-3 py-1 rounded shadow-md">
+                    {tour.country}
+                  </span>
+                  <span class={`backdrop-blur-md font-label-md text-label-md tracking-wider uppercase px-3 py-1 rounded shadow-md ${
+                    tour.departures[0] === 'Date Not Planned'
+                      ? 'bg-surface-container-high/95 text-on-surface-variant'
+                      : 'bg-primary text-on-primary font-bold'
+                  }`}>
+                    {tour.badge}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Body Column (7 cols) -->
+              <div class="lg:w-7/12 p-space-lg md:p-space-xl flex flex-col justify-between">
+                <div>
+                  
+                  <!-- Meta Header -->
+                  <div class="flex flex-wrap items-center justify-between gap-2 text-secondary font-label-md text-label-md uppercase tracking-wider mb-2">
+                    <span class="flex items-center gap-1 font-bold text-primary">
+                      <span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+                      {tour.duration}
+                    </span>
+                    <span>•</span>
+                    <span class="font-bold">{tour.price}</span>
+                  </div>
+
+                  <a href={`/${tour.slug}`} class="block group-hover:text-secondary transition-colors">
+                    <h3 class="font-headline-md text-headline-md text-primary mb-3">
+                      {tour.title}
+                    </h3>
+                  </a>
+
+                  <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+                    {tour.overview[0]}
+                  </p>
+
+                  <!-- Highlights Grid -->
+                  <div class="mb-5">
+                    <span class="font-label-md text-[11px] uppercase tracking-widest text-secondary font-bold block mb-2">
+                      Key Experiences Included:
+                    </span>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {tour.highlights.slice(0, 4).map((h) => (
+                        <li class="flex items-start gap-2 font-body-md text-[13px] text-on-surface">
+                          <span class="material-symbols-outlined text-[15px] text-on-tertiary-container shrink-0 mt-0.5">check_circle</span>
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <!-- Dates Pill Box -->
+                  <div class="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/30 mb-5">
+                    <span class="font-label-md text-[10px] uppercase tracking-widest text-secondary font-bold block mb-1.5">
+                      {tour.departures[0] === 'Date Not Planned' ? 'Departure Status:' : 'Confirmed Calendar Departure:'}
+                    </span>
+                    <div class="flex flex-wrap gap-2">
+                      {tour.departures.map((date) => (
+                        <span class={`px-3 py-1 rounded-md font-label-md text-[12px] font-semibold flex items-center gap-1.5 ${
+                          date === 'Date Not Planned'
+                            ? 'bg-surface-container-high text-on-surface-variant'
+                            : 'bg-primary text-on-primary shadow-sm'
+                        }`}>
+                          <span class="material-symbols-outlined text-[14px]">
+                            {date === 'Date Not Planned' ? 'event_busy' : 'event_available'}
+                          </span>
+                          <span>{date === 'Date Not Planned' ? 'Date Not Planned • Custom Inquiries Welcome (5+)' : `${date} (Reservations Open)`}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Footer & CTA -->
+                <div class="pt-4 border-t border-surface-container-highest flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div>
+                    <span class="font-caption text-caption text-secondary uppercase tracking-widest block">All-Inclusive Land Price</span>
+                    <span class="font-headline-md text-headline-md text-primary font-normal">
+                      {tour.price} <span class="font-caption text-caption text-on-surface-variant font-normal">/ person</span>
+                    </span>
+                  </div>
+
+                  <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <a
+                      href={`/${tour.slug}`}
+                      class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 bg-surface-container text-primary border border-outline-variant/50 px-4 py-2.5 rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface-container-high transition-colors text-center font-bold text-xs"
+                    >
+                      <span>View Full Itinerary</span>
+                      <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                    </a>
+
+                    <a
+                      href={tour.departures[0] === 'Date Not Planned' ? `/contact?destination=${tour.slug}&type=family-friends` : `/contact?destination=${tour.slug}&date=${encodeURIComponent(tour.departures[0])}`}
+                      class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-primary-container transition-colors text-center font-bold text-xs shadow-sm"
+                    >
+                      <span>{tour.departures[0] === 'Date Not Planned' ? 'Inquire (5+)' : 'Reserve Now'}</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Custom / Private Groups Section (From PDF Slide 6 & 8) -->
+    <section class="w-full py-space-2xl bg-surface-container-low border-t border-outline-variant/30">
+      <div class="max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        <div class="bg-primary text-on-primary rounded-3xl p-space-xl md:p-space-2xl relative overflow-hidden shadow-xl scroll-reveal-scale">
+          <div class="relative z-10 max-w-2xl">
+            <span class="font-label-md text-label-md uppercase tracking-widest text-secondary-fixed font-semibold">
+              Option 01: Private Group Design
+            </span>
+            <h2 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-on-primary font-normal mt-2">
+              Have a Ready-to-Travel Group of 5 or More?
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-primary/85 mt-4 leading-relaxed">
+              We will craft a private itinerary of your dreams across any combination of Nicaragua, Guatemala, Honduras, Costa Rica, El Salvador, or Peru. You specify the travel season, routes, lodging style, and whether Michael or Maria guides your party.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-space-lg">
+              <a
+                href="/contact?type=family-friends"
+                class="bg-secondary-fixed text-primary px-space-xl py-space-sm rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface hover:text-primary transition-all font-bold shadow-md"
+              >
+                Inquire for 5+ Travelers
+              </a>
+              <a
+                href="/about"
+                class="bg-surface/10 backdrop-blur-md text-surface border border-white/20 px-space-lg py-space-sm rounded font-label-lg text-label-lg uppercase tracking-wider hover:bg-surface/20 transition-all font-bold"
+              >
+                Meet Your Guides
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>

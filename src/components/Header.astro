@@ -1,0 +1,625 @@
+---
+// Header / Navigation component with standalone page routes: HOME (/), Upcoming Tours (/tours), Gallery (/gallery), About Us (/about), Contact (/contact)
+
+const currentPath = Astro.url.pathname;
+const isActive = (path: string) => {
+  if (path === '/' && currentPath === '/') return true;
+  if (path !== '/' && currentPath.startsWith(path)) return true;
+  return false;
+};
+---
+
+<header class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/95 backdrop-blur-md shadow-[0_1px_8px_rgba(20,40,29,0.06)] border-b border-outline-variant/30 transition-all duration-300">
+  <div class="h-20 max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg flex items-center justify-between gap-gutter">
+
+    <!-- Logo & Brand -->
+    <div class="flex items-center gap-space-md shrink-0">
+      <a href="/" class="flex items-center gap-3 group">
+        <img
+          src="/assets/images/logo.png"
+          alt="Mountains to Coast Travel Logo"
+          class="h-11 w-auto max-w-[120px] object-contain rounded-lg shadow-sm group-hover:scale-105 transition-transform shrink-0"
+        />
+        <div class="flex flex-col">
+          <span class="font-headline-sm text-headline-sm text-primary tracking-tight font-medium group-hover:text-secondary transition-colors leading-tight">Mountains to Coast</span>
+          <span class="font-label-md text-label-md uppercase text-secondary tracking-widest">Latin America</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden xl:flex items-center gap-space-lg">
+      
+      <!-- HOME -->
+      <a
+        href="/"
+        class={`font-label-lg text-label-lg uppercase tracking-wider transition-colors py-space-xs ${
+          isActive('/') ? 'text-primary font-bold border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'
+        }`}
+        aria-current={isActive('/') ? 'page' : undefined}
+      >
+        HOME
+      </a>
+
+      <!-- Upcoming Tours with Dropdown -->
+      <div class="relative group" id="upcoming-tours-container">
+        <button
+          type="button"
+          id="upcoming-tours-btn"
+          aria-haspopup="true"
+          aria-expanded="false"
+          class={`font-label-lg text-label-lg uppercase tracking-wider transition-colors py-space-xs inline-flex items-center gap-1 cursor-pointer focus:outline-none ${
+            isActive('/tours') ? 'text-primary font-bold border-b-2 border-primary' : 'text-on-surface-variant group-hover:text-primary'
+          }`}
+        >
+          <span>Upcoming Tours</span>
+          <span id="tours-chevron" class="material-symbols-outlined text-[18px] text-secondary transition-transform duration-200 group-hover:rotate-180">
+            keyboard_arrow_down
+          </span>
+        </button>
+
+        <!-- Dropdown Menu (100% Solid White Opaque Background, High Shadow & Ring) -->
+        <div
+          id="upcoming-tours-menu"
+          class="absolute left-[-80px] top-full pt-2 w-[850px] opacity-0 invisible pointer-events-none group-hover:opacity-100 group-hover:visible group-hover:pointer-events-auto transition-all duration-200 z-[100]"
+        >
+          <div
+            id="upcoming-tours-card"
+            class="rounded-2xl border border-[#c2c8c2] shadow-[0_30px_90px_rgba(1,18,9,0.32)] p-6 overflow-hidden ring-1 ring-black/10"
+            style="background-color: #ffffff !important; opacity: 1 !important;"
+          >
+            
+            <!-- Dropdown Header -->
+            <div class="flex items-center justify-between pb-3.5 border-b border-[#e4e2dd]">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[20px] text-on-tertiary-container">calendar_month</span>
+                <span class="font-label-md text-label-md uppercase tracking-widest text-on-tertiary-container font-bold">2026 – 2027 Scheduled Expeditions</span>
+              </div>
+              <a
+                href="/tours"
+                class="font-label-md text-label-md uppercase tracking-wider text-primary hover:text-secondary transition-colors inline-flex items-center gap-1 font-semibold"
+              >
+                View Full Tours Catalog <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </a>
+            </div>
+
+            <!-- Dropdown Columns -->
+            <div class="grid grid-cols-12 gap-5 pt-4">
+              
+              <!-- Featured Tours Column (7 cols) -->
+              <div class="col-span-7 flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">6 Latin American Destinations</span>
+                  <span class="text-[10px] bg-primary text-on-primary px-2 py-0.5 rounded font-bold uppercase tracking-wider">1 Planned Departure</span>
+                </div>
+                
+                <!-- Destination 1: Nicaragua (Primary Featured Planned Tour) -->
+                <a
+                  href="/nicaragua"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border-2 border-secondary hover:border-primary shadow-sm"
+                  style="background-color: #f6fbf7 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-primary text-secondary-fixed flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">volcano</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-bold group-hover/item:text-secondary transition-colors truncate">
+                        Nicaragua: Nature is Waiting for You
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-primary text-on-primary px-2 py-0.5 rounded uppercase font-bold whitespace-nowrap shrink-0">
+                        Feb 28 – Mar 7, 2027
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Granada, Ometepe Island, Caribbean Corn Island &amp; Laguna de Apoyo • 9 Days
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Destination 2: Costa Rica -->
+                <a
+                  href="/costa-rica"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border border-[#e4e2dd] hover:border-secondary/60 shadow-sm"
+                  style="background-color: #fbf9f4 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">forest</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-medium group-hover/item:text-secondary transition-colors truncate">
+                        Costa Rica: Volcanoes &amp; Cloud Forests
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded uppercase font-medium whitespace-nowrap shrink-0">
+                        Date Not Planned
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Tabacón hot springs, Monteverde canopy &amp; Manuel Antonio • Custom Groups 5+
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Destination 3: Guatemala -->
+                <a
+                  href="/guatemala"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border border-[#e4e2dd] hover:border-secondary/60 shadow-sm"
+                  style="background-color: #fbf9f4 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">temple_buddhist</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-medium group-hover/item:text-secondary transition-colors truncate">
+                        Guatemala: Mayan Highlands &amp; Atitlán
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded uppercase font-medium whitespace-nowrap shrink-0">
+                        Date Not Planned
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Lake Atitlán skiff charters, Antigua fincas &amp; Tikal sunrise • Custom Groups 5+
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Destination 4: Honduras -->
+                <a
+                  href="/honduras"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border border-[#e4e2dd] hover:border-secondary/60 shadow-sm"
+                  style="background-color: #fbf9f4 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">history_edu</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-medium group-hover/item:text-secondary transition-colors truncate">
+                        Honduras: Copán Ruinas &amp; Pico Bonito
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded uppercase font-medium whitespace-nowrap shrink-0">
+                        Date Not Planned
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Hieroglyphic stairway, Cangrejal canyon &amp; Caribbean reef • Custom Groups 5+
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Destination 5: El Salvador -->
+                <a
+                  href="/el-salvador"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border border-[#e4e2dd] hover:border-secondary/60 shadow-sm"
+                  style="background-color: #fbf9f4 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">surfing</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-medium group-hover/item:text-secondary transition-colors truncate">
+                        El Salvador: Volcanoes &amp; Pacific Surf
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded uppercase font-medium whitespace-nowrap shrink-0">
+                        Date Not Planned
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Santa Ana crater lake, Ruta de las Flores &amp; El Sunzal coast • Custom Groups 5+
+                    </p>
+                  </div>
+                </a>
+
+                <!-- Destination 6: Peru -->
+                <a
+                  href="/peru"
+                  class="group/item p-2.5 rounded-xl transition-all flex items-start gap-3 border border-[#e4e2dd] hover:border-secondary/60 shadow-sm"
+                  style="background-color: #fbf9f4 !important;"
+                >
+                  <div class="w-9 h-9 rounded-lg bg-surface-container-high text-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">landscape</span>
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h4 class="font-headline-sm text-[13px] leading-snug text-primary font-medium group-hover/item:text-secondary transition-colors truncate">
+                        Peru: Sacred Valley &amp; Machu Picchu
+                      </h4>
+                      <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded uppercase font-medium whitespace-nowrap shrink-0">
+                        Date Not Planned
+                      </span>
+                    </div>
+                    <p class="font-caption text-[11px] text-on-surface-variant line-clamp-1">
+                      Inca citadels, Sacred Valley terraces &amp; imperial Cusco • Custom Groups 5+
+                    </p>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Travel Types & Custom Options (5 cols) -->
+              <div
+                class="col-span-5 p-5 rounded-2xl flex flex-col justify-between border border-[#e4e2dd] shadow-sm"
+                style="background-color: #f5f3ee !important;"
+              >
+                <div>
+                  <span class="font-label-md text-label-md uppercase tracking-wider text-secondary font-bold">Personal Travel Options</span>
+                  
+                  <div class="mt-3.5 space-y-3.5">
+                    <div class="flex items-start gap-2.5">
+                      <span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">diversity_3</span>
+                      <div>
+                        <h5 class="font-label-lg text-[13px] text-primary font-bold">Family &amp; Friends Trips</h5>
+                        <p class="font-caption text-caption text-on-surface-variant">
+                          Bring a group of 5 or more. We tailor season, route, lodging, and assign Michael or Maria.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start gap-2.5">
+                      <span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">verified_user</span>
+                      <div>
+                        <h5 class="font-label-lg text-[13px] text-primary font-bold">Guaranteed Departures</h5>
+                        <p class="font-caption text-caption text-on-surface-variant">
+                          Fixed calendar dates. If minimum is not reached, deposits are 100% fully refunded.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="flex items-start gap-2.5">
+                      <span class="material-symbols-outlined text-[20px] text-primary shrink-0 mt-0.5">translate</span>
+                      <div>
+                        <h5 class="font-label-lg text-[13px] text-primary font-bold">Bilingual Native Guides</h5>
+                        <p class="font-caption text-caption text-on-surface-variant">
+                          Led by Michael &amp; Maria — decades of regional immersion, fluent in English &amp; Spanish.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pt-4 border-t border-[#e4e2dd] mt-3">
+                  <a
+                    href="/contact?type=family-friends"
+                    class="w-full inline-flex items-center justify-center gap-1.5 bg-primary text-on-primary py-2.5 px-3 rounded-xl font-label-md text-label-md uppercase tracking-wider hover:bg-primary-container transition-colors text-center font-bold shadow-sm"
+                  >
+                    <span>Request Custom Itinerary</span>
+                    <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Dropdown Footer -->
+            <div class="mt-4 pt-3 border-t border-[#e4e2dd] flex items-center justify-between text-secondary font-caption text-[11px]">
+              <span>Destinations: Nicaragua • Guatemala • Honduras • Costa Rica • El Salvador • Peru</span>
+              <a href="/tours" class="flex items-center gap-1 text-primary hover:text-secondary font-bold">
+                <span>Explore All 6 Destinations</span>
+                <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT US -->
+      <a
+        href="/about"
+        class={`font-label-lg text-label-lg uppercase tracking-wider transition-colors py-space-xs ${
+          isActive('/about') ? 'text-primary font-bold border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'
+        }`}
+        aria-current={isActive('/about') ? 'page' : undefined}
+      >
+        About Us
+      </a>
+
+      <!-- GALLERY -->
+      <a
+        href="/gallery"
+        class={`font-label-lg text-label-lg uppercase tracking-wider transition-colors py-space-xs ${
+          isActive('/gallery') ? 'text-primary font-bold border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'
+        }`}
+        aria-current={isActive('/gallery') ? 'page' : undefined}
+      >
+        Gallery
+      </a>
+
+      <!-- CONTACT -->
+      <a
+        href="/contact"
+        class={`font-label-lg text-label-lg uppercase tracking-wider transition-colors py-space-xs ${
+          isActive('/contact') ? 'text-primary font-bold border-b-2 border-primary' : 'text-on-surface-variant hover:text-primary'
+        }`}
+        aria-current={isActive('/contact') ? 'page' : undefined}
+      >
+        Contact
+      </a>
+    </nav>
+
+    <!-- Right Actions -->
+    <div class="flex items-center gap-space-md shrink-0">
+      <!-- CTA Button -->
+      <a
+        href="/contact"
+        class="hidden sm:inline-flex items-center justify-center bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-widest px-space-md py-space-sm rounded transition-all duration-300 hover:bg-primary shadow-[0_4px_16px_rgba(20,40,29,0.15)]"
+      >
+        Plan Your Journey
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-btn"
+        class="xl:hidden w-10 h-10 flex items-center justify-center text-primary hover:text-secondary rounded-lg hover:bg-surface-container-high transition-colors cursor-pointer"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span id="menu-icon" class="material-symbols-outlined text-[28px]">menu</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Drawer (Hamburger Menu) -->
+  <div id="mobile-menu" class="hidden xl:hidden border-t border-outline-variant bg-surface/98 backdrop-blur-xl shadow-lg max-h-[85vh] overflow-y-auto">
+    <nav class="flex flex-col p-margin gap-space-xs">
+      
+      <!-- HOME -->
+      <a href="/" class={`font-label-lg text-label-lg uppercase tracking-wider py-space-sm border-b border-outline-variant/50 ${isActive('/') ? 'text-primary font-bold' : 'text-on-surface-variant'}`}>
+        HOME
+      </a>
+
+      <!-- Upcoming Tours Accordion -->
+      <div class="border-b border-outline-variant/50">
+        <div class="flex items-center justify-between py-space-sm">
+          <a href="/tours" class={`font-label-lg text-label-lg uppercase tracking-wider ${isActive('/tours') ? 'text-primary font-bold' : 'text-on-surface-variant'}`}>
+            Upcoming Tours
+          </a>
+          <button
+            type="button"
+            id="mobile-tours-accordion-btn"
+            class="p-1 text-secondary hover:text-primary focus:outline-none cursor-pointer"
+            aria-label="Toggle tours submenu"
+          >
+            <span id="mobile-tours-icon" class="material-symbols-outlined text-[22px] transition-transform duration-200">
+              expand_more
+            </span>
+          </button>
+        </div>
+
+        <div id="mobile-tours-sublist" class="hidden pl-3 pb-3 flex flex-col gap-2">
+          <!-- Nicaragua (Confirmed) -->
+          <a href="/nicaragua" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1.5 border-b border-surface-container-high bg-primary/5 px-2 rounded">
+            <span class="font-bold">Nicaragua: Nature is Waiting</span>
+            <span class="font-label-md text-[10px] bg-primary text-on-primary px-1.5 py-0.5 rounded font-bold whitespace-nowrap">Feb 28 – Mar 7, 2027</span>
+          </a>
+          <!-- Costa Rica -->
+          <a href="/costa-rica" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1 border-b border-surface-container-high">
+            <span>Costa Rica: Volcanoes &amp; Cloud Forests</span>
+            <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded whitespace-nowrap">Date Not Planned</span>
+          </a>
+          <!-- Guatemala -->
+          <a href="/guatemala" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1 border-b border-surface-container-high">
+            <span>Guatemala: Mayan Highlands &amp; Atitlán</span>
+            <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded whitespace-nowrap">Date Not Planned</span>
+          </a>
+          <!-- Honduras -->
+          <a href="/honduras" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1 border-b border-surface-container-high">
+            <span>Honduras: Copán Ruinas &amp; Pico Bonito</span>
+            <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded whitespace-nowrap">Date Not Planned</span>
+          </a>
+          <!-- El Salvador -->
+          <a href="/el-salvador" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1 border-b border-surface-container-high">
+            <span>El Salvador: Volcanoes &amp; Pacific Surf</span>
+            <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded whitespace-nowrap">Date Not Planned</span>
+          </a>
+          <!-- Peru -->
+          <a href="/peru" class="font-body-md text-[13px] text-primary hover:text-secondary flex items-center justify-between py-1 border-b border-surface-container-high">
+            <span>Peru: Sacred Valley &amp; Machu Picchu</span>
+            <span class="font-label-md text-[10px] bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded whitespace-nowrap">Date Not Planned</span>
+          </a>
+          <a href="/contact?type=family-friends" class="font-body-md text-[12px] text-secondary flex items-center gap-1 pt-1">
+            <span class="material-symbols-outlined text-[14px]">groups</span>
+            <span>Family &amp; Friends Trips (5+ Travelers)</span>
+          </a>
+          <a href="/tours" class="font-label-md text-label-md uppercase tracking-wider text-on-tertiary-container pt-1 inline-flex items-center gap-1 font-semibold">
+            All 6 Destinations &amp; Dates <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ABOUT US -->
+      <a href="/about" class={`font-label-lg text-label-lg uppercase tracking-wider py-space-sm border-b border-outline-variant/50 ${isActive('/about') ? 'text-primary font-bold' : 'text-on-surface-variant'}`}>
+        About Us
+      </a>
+
+      <!-- GALLERY -->
+      <a href="/gallery" class={`font-label-lg text-label-lg uppercase tracking-wider py-space-sm border-b border-outline-variant/50 ${isActive('/gallery') ? 'text-primary font-bold' : 'text-on-surface-variant'}`}>
+        Gallery
+      </a>
+
+      <!-- CONTACT -->
+      <a href="/contact" class={`font-label-lg text-label-lg uppercase tracking-wider py-space-sm border-b border-outline-variant/50 ${isActive('/contact') ? 'text-primary font-bold' : 'text-on-surface-variant'}`}>
+        Contact
+      </a>
+
+      <!-- Mobile CTA Button -->
+      <div class="pt-3 pb-1">
+        <a
+          href="/contact"
+          class="w-full inline-flex items-center justify-center bg-primary-container text-on-primary font-label-lg text-label-lg uppercase tracking-widest py-3 px-4 rounded-xl transition-all text-center font-bold shadow-md hover:bg-primary"
+        >
+          Plan Your Journey
+        </a>
+      </div>
+
+      <!-- Meet Guides Profile -->
+      <div class="py-2.5 border-t border-outline-variant/50">
+        <a
+          href="/about"
+          title="Meet Your Guides Michael & Maria"
+          class="flex items-center gap-3 p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-colors border border-outline-variant/40"
+        >
+          <div class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-sm">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">support_agent</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center justify-between">
+              <span class="font-headline-sm text-[13px] text-primary font-bold">Meet Your Guides</span>
+              <span class="font-label-md text-[10px] text-secondary uppercase font-bold tracking-wider">About Us &rarr;</span>
+            </div>
+            <p class="font-caption text-[11px] text-on-surface-variant truncate">
+              Michael &amp; Maria • Decades in Latin America
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Phone Direct Line & Email -->
+      <div class="py-2.5 flex flex-col gap-2 text-xs text-on-surface-variant border-t border-outline-variant/50">
+        <a href="tel:+14437225210" class="text-primary hover:text-secondary flex items-center gap-2.5 font-semibold py-1">
+          <div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[16px] text-secondary">call</span>
+          </div>
+          <span>+1 (443) 722-5210 (Direct Line)</span>
+        </a>
+        <a href="mailto:mheller@mountainstocoasttravel.com" class="text-primary hover:text-secondary flex items-center gap-2.5 font-semibold py-1">
+          <div class="w-7 h-7 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[16px] text-secondary">mail</span>
+          </div>
+          <span class="truncate">mheller@mountainstocoasttravel.com</span>
+        </a>
+      </div>
+
+      <!-- Currency & Language Selector -->
+      <div class="pt-2.5 pb-2 border-t border-outline-variant/50 flex items-center justify-between">
+        <span class="font-label-md text-[11px] uppercase tracking-wider text-secondary font-semibold">Language &amp; Currency</span>
+        <div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-[11px] uppercase tracking-wider bg-surface-container-low px-2.5 py-1 rounded-lg border border-outline-variant/40">
+          <span class="font-bold text-primary">USD</span>
+          <span class="opacity-30">/</span>
+          <button class="hover:text-on-surface text-primary font-bold transition-colors cursor-pointer" type="button">EN</button>
+          <span class="opacity-30">|</span>
+          <button class="hover:text-on-surface text-secondary transition-colors cursor-pointer" type="button">ES</button>
+        </div>
+      </div>
+
+      <div class="pt-2 pb-1 text-center text-secondary font-caption text-[11px]">
+        Guided by Michael &amp; Maria • Decades of Latin America Experience
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style is:global>
+  /* Guaranteed CSS hover & active states */
+  #upcoming-tours-container:hover #upcoming-tours-menu,
+  #upcoming-tours-container:focus-within #upcoming-tours-menu,
+  #upcoming-tours-container.is-hovered #upcoming-tours-menu,
+  #upcoming-tours-menu.is-open {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    transform: translateY(0) !important;
+  }
+
+  #upcoming-tours-container:hover #tours-chevron,
+  #upcoming-tours-container.is-hovered #tours-chevron {
+    transform: rotate(180deg);
+  }
+
+  #upcoming-tours-menu {
+    transform: translateY(6px);
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.2s ease;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+
+  function closeMobileMenu() {
+    mobileMenu?.classList.add('hidden');
+    if (menuIcon) menuIcon.textContent = 'menu';
+    mobileBtn?.setAttribute('aria-expanded', 'false');
+  }
+
+  mobileBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = mobileMenu?.classList.toggle('hidden');
+    if (menuIcon) {
+      menuIcon.textContent = isHidden ? 'menu' : 'close';
+    }
+    mobileBtn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+  });
+
+  // Close mobile menu when clicking any navigation link
+  mobileMenu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (
+      mobileMenu &&
+      !mobileMenu.classList.contains('hidden') &&
+      !mobileMenu.contains(e.target as Node) &&
+      !mobileBtn?.contains(e.target as Node)
+    ) {
+      closeMobileMenu();
+    }
+  });
+
+  // Mobile tours accordion toggle
+  const mobileToursBtn = document.getElementById('mobile-tours-accordion-btn');
+  const mobileToursSublist = document.getElementById('mobile-tours-sublist');
+  const mobileToursIcon = document.getElementById('mobile-tours-icon');
+
+  mobileToursBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isHidden = mobileToursSublist?.classList.toggle('hidden');
+    if (mobileToursIcon) {
+      mobileToursIcon.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+  });
+
+  // Desktop hover & click support
+  const container = document.getElementById('upcoming-tours-container');
+  const toursBtn = document.getElementById('upcoming-tours-btn');
+  const toursMenu = document.getElementById('upcoming-tours-menu');
+
+  // Mouse enter / leave helpers for rock-solid hover
+  container?.addEventListener('mouseenter', () => {
+    container.classList.add('is-hovered');
+  });
+
+  container?.addEventListener('mouseleave', () => {
+    container.classList.remove('is-hovered');
+    toursMenu?.classList.remove('is-open');
+  });
+
+  // Toggle on click
+  toursBtn?.addEventListener('click', (e) => {
+    // If not navigating away immediately, toggle
+    if (toursMenu?.classList.contains('is-open')) {
+      toursMenu.classList.remove('is-open');
+      container?.classList.remove('is-hovered');
+    } else {
+      toursMenu?.classList.add('is-open');
+      container?.classList.add('is-hovered');
+    }
+  });
+
+  // Close desktop dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!container?.contains(e.target as Node)) {
+      toursMenu?.classList.remove('is-open');
+      container?.classList.remove('is-hovered');
+    }
+  });
+</script>

@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = "Privacy Policy | Mountains to Coast Travel | Guided Tours";
+const pageDescription = "Privacy Policy for Mountains to Coast Travel. Learn how we safeguard your personal information when booking Latin America guided tours and group trips.";
+const pageKeywords = "privacy policy, Mountains to travel coast, guided tours, usa guided tours, Latin America group trips, us travel guides";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+>
+  <Header />
+
+  <main class="w-full pt-20 bg-surface">
+
+    <!-- Privacy Header Hero -->
+    <section class="w-full py-space-xl bg-primary text-surface relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/90 to-primary/60"></div>
+      <div class="relative z-10 max-w-[1440px] mx-auto px-margin md:px-margin-md lg:px-margin-lg pt-12 pb-4">
+        <div class="flex items-center gap-2 text-secondary-fixed font-label-md text-label-md uppercase tracking-widest mb-3">
+          <a href="/" class="hover:underline">Home</a>
+          <span>/</span>
+          <span class="text-surface font-semibold">Privacy Policy</span>
+        </div>
+        <h1 class="font-headline-lg text-headline-lg md:font-display-xl md:text-display-xl text-surface font-normal tracking-tight">
+          Privacy Policy &amp; Data Stewardship
+        </h1>
+        <p class="font-subhead text-subhead text-surface/85 mt-3 max-w-2xl">
+          We treat your personal data with the same integrity and respect that we bring to our expeditions in the field.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Sections -->
+    <section class="w-full py-space-2xl bg-surface">
+      <div class="max-w-[1000px] mx-auto px-margin md:px-margin-md lg:px-margin-lg">
+        
+        <div class="space-y-space-xl text-on-surface">
+
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              1. What Information We Collect
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+              When you submit a trip reservation or contact inquiry on our website, we collect only the necessary details required to plan your journey:
+            </p>
+            <ul class="space-y-2 font-body-md text-body-md text-on-surface pl-4 list-disc">
+              <li><strong>Contact Details:</strong> Your full name, email address, telephone/WhatsApp number.</li>
+              <li><strong>Travel Preferences:</strong> Desired destinations (Nicaragua, Costa Rica, Guatemala, Panama, Honduras, El Salvador), target departure season, number of travelers, and dietary or special physical considerations.</li>
+              <li><strong>Direct Communications:</strong> Notes and questions you share directly with Michael and Maria to customize your itinerary.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              2. How We Use Your Information
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Your information is used strictly to provide personalized expedition advice, confirm tour reservations, coordinate private eco-lodge bookings, and communicate itinerary updates. We do not sell, rent, lease, or monetize your personal information to third-party advertisers or automated brokers under any circumstances.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              3. Direct WhatsApp &amp; Email Communications
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              If you reach out via our WhatsApp concierge line or email, your messages are handled directly by our founders and expedition guides (Michael &amp; Maria). You can opt out of any communications at any time simply by replying or requesting removal.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              4. Data Protection &amp; Security
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              We employ SSL encryption across our entire website to ensure all form submissions and inquiries are transmitted securely. Access to traveler reservation information is restricted strictly to necessary expedition logistics personnel.
+            </p>
+          </div>
+
+          <div>
+            <h2 class="font-headline-sm text-headline-sm text-primary mb-2">
+              5. Your Rights
+            </h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              You retain the right to request a copy of the personal information we hold for you, request corrections, or ask for the complete deletion of your records from our systems at any point by emailing <a href="mailto:mheller@mountainstocoasttravel.com" class="text-primary font-bold hover:underline">mheller@mountainstocoasttravel.com</a>.
+            </p>
+          </div>
+
+          <!-- Contact box -->
+          <div class="pt-space-lg border-t border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p class="font-label-lg text-primary font-bold">Questions About Privacy?</p>
+              <p class="font-caption text-caption text-on-surface-variant">We are committed to absolute transparency with our travelers.</p>
+            </div>
+            <a
+              href="/contact"
+              class="bg-primary text-on-primary px-space-md py-2 rounded-lg font-label-md text-label-md uppercase tracking-wider hover:bg-primary-container transition-colors shrink-0"
+            >
+              Get in Touch
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
